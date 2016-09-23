@@ -1,0 +1,84 @@
+$base-font-size:    16;
+$base-line-height:  28;
+
+@mixin font-size($sizeInPx: $base-font-size, $line: false) {
+  @if unit($sizeInPx) == "px" {
+    $sizeInPx: $sizeInPx / 1px;
+  }
+  @else if unit($sizeInPx) == "em" {
+    @warn "Not a valid value: #{$value}";
+  }
+  font-size: ($sizeInPx) + px;
+  font-size: ($sizeInPx / $base-font-size) + rem;
+
+  @if( $line == true ) {
+    $line: $sizeInPx * 1.66666667;
+  }
+
+  @if( $line != false ) {
+    line-height: ($line) + px;
+    line-height: ($line / $base-font-size) + rem;
+  }
+}
+
+h1,h2,h3,h4,h5,h6,hgroup,
+ul,ol,dl,
+blockquote,p,address,
+table,
+fieldset,figure,
+pre,hr {
+  margin-top: 0;
+  margin-bottom:$base-line-height*1px;
+  margin-bottom:($base-line-height/$base-font-size)*1rem;
+}
+
+html:before {
+  content: "desktop";
+  display: none; /* Prevent from displaying. */
+}
+@media (max-width: 768px) {
+  html:before {
+    content: "tablet";
+  }
+}
+@media (max-width: 480px) {
+  html:before {
+    content: "mobile";
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@font-face {
+  font-family: 'Century-Old-Style-Bold';
+  src: url("../fonts/century-old-style-bold.eot");
+  src: url("../fonts/century-old-style-bold.eot?#iefix") format("embedded-opentype"),
+  url("../fonts/century-old-style-bold.woff2") format("woff2"),
+  url("../fonts/century-old-style-bold.woff") format("woff"),
+  url("../fonts/century-old-style-bold.ttf") format("truetype"),
+  url("../fonts/century-old-style-bold.svg#century-old-stylebold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'transportmedium';
+  src: url('../fonts/transport_medium-webfont.woff2') format('woff2'),
+       url('../fonts/transport_medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin font-serif {
+  font-family: 'Century-Old-Style-Bold',Georgia,Times,'Times New Roman',serif;
+}
+
+@mixin font-sans-serif {
+  font-family: 'transportmedium',Helvetica,Arial,sans-serif;
+}
