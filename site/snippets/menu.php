@@ -1,22 +1,29 @@
-<nav role="navigation">
-
-  <ul class="menu cf">
-    <?php foreach($pages->visible() as $p): ?>
-    <li>
-      <a <?php e($p->isOpen(), ' class="active"') ?> href="<?php echo $p->url() ?>"><?php echo $p->title()->html() ?></a>
-
-      <?php if($p->hasVisibleChildren()): ?>
-      <ul class="submenu">
-        <?php foreach($p->children()->visible() as $p): ?>
-        <li>
-          <a href="<?php echo $p->url() ?>"><?php echo $p->title()->html() ?></a>
-        </li>
-        <?php endforeach ?>
-      </ul>
-      <?php endif ?>
-
-    </li>
+<?php
+// selective items
+$leftcol = $pages->find('fkp')->children();
+if($leftcol and $leftcol->count()):
+?>
+<nav class='main-nav left-nav' role="navigation">
+  <ul>
+    <li><a href="<?php echo url() ?>"><?php echo $pages->find('fkp')->title() ?></a></li>
+    <?php foreach($leftcol as $item): ?>
+    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?php echo $item->url() ?>"><?php echo $item->title()->html() ?></a></li>
     <?php endforeach ?>
   </ul>
-
 </nav>
+<?php endif ?>
+
+<?php
+// selective items
+$rightcol = $pages->find('other-people-magazine')->children();
+if($rightcol and $rightcol->count()):
+?>
+<nav class='main-nav right-nav' role="navigation">
+  <ul>
+    <li><a href="<?php echo url() ?>"><?php echo $pages->find('other-people-magazine')->title() ?></a></li>
+    <?php foreach($rightcol as $item): ?>
+    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?php echo $item->url() ?>"><?php echo $item->title()->html() ?></a></li>
+    <?php endforeach ?>
+  </ul>
+</nav>
+<?php endif ?>

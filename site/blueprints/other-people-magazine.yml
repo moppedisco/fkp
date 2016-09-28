@@ -1,0 +1,11 @@
+title: Other people magazine
+pages:
+  template: rightcol
+files: false
+fields:
+  title:
+    label: Title
+    type:  text
+  text:
+    label: Text
+    type:  textarea

@@ -1,0 +1,11 @@
+title: Fkp
+pages:
+  template: leftcol
+files: false
+fields:
+  title:
+    label: Title
+    type:  text
+  text:
+    label: Text
+    type:  textarea

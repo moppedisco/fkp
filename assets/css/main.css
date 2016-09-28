@@ -1,0 +1,126 @@
+h1, h2, h3, h4, h5, h6, hgroup,
+ul, ol, dl,
+blockquote, p, address,
+table,
+fieldset, figure,
+pre, hr {
+  margin-top: 0;
+  margin-bottom: 28px;
+  margin-bottom: 1.75rem; }
+
+html:before {
+  content: "desktop";
+  display: none;
+  /* Prevent from displaying. */ }
+
+@media (max-width: 768px) {
+  html:before {
+    content: "tablet"; } }
+@media (max-width: 480px) {
+  html:before {
+    content: "mobile"; } }
+.fullscreen-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100; }
+
+.fullscreen-bg video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+@media (min-aspect-ratio: 16 / 9) {
+  .fullscreen-bg video {
+    height: 300%;
+    top: -100%; } }
+@media (max-aspect-ratio: 16 / 9) {
+  .fullscreen-bg video {
+    width: 300%;
+    left: -100%; } }
+@media (max-width: 767px) {
+  .fullscreen-bg {
+    background: url("../img/videoframe.jpg") center center/cover no-repeat; }
+
+  .fullscreen-bg video {
+    display: none; } }
+* {
+  box-sizing: border-box; }
+
+html, body {
+  height: 100%; }
+
+body {
+  background: #000; }
+
+figure {
+  margin: 0; }
+
+video {
+  opacity: 0.3; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+.header {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+  .template--leftcol .header .left-nav {
+    -webkit-transform: translateX(470px);
+            transform: translateX(470px); }
+  .template--rightcol .header .right-nav {
+    -webkit-transform: translateX(-470px);
+            transform: translateX(-470px); }
+  .header .main-nav {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 40px;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 400px;
+            flex: 0 1 400px; }
+    .header .main-nav.right-nav {
+      text-align: right; }
+  .header ul, .header li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+  .header a {
+    text-transform: uppercase;
+    font-size: 22px;
+    font-size: 1.375rem;
+    color: #fff;
+    text-decoration: none; }
+  .header:hover {
+    cursor: w-resize; }
+
+.content {
+  background: #fff;
+  max-width: 400px;
+  padding: 40px;
+  width: 100%; }
+  .template--leftcol .content {
+    float: left; }
+  .template--rightcol .content {
+    float: right; }
+
+/*# sourceMappingURL=main.css.map */
