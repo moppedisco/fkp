@@ -99,13 +99,18 @@ img {
   text-decoration: line-through; }
 .header li:first-child.active {
   text-decoration: none; }
-.header a {
+.header li a {
+  position: relative;
   text-transform: uppercase;
   font-size: 12px;
   font-size: 0.75rem;
   letter-spacing: 1px;
   color: #fff;
   text-decoration: none; }
+.header .left-nav a:hover {
+  left: 1px; }
+.header .right-nav a:hover {
+  right: 1px; }
 
 .template--leftcol .barba-container {
   right: auto;

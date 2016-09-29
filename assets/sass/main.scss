@@ -61,12 +61,21 @@ img {
     text-decoration: none;
   }
 
-  a {
+  li a {
+    position: relative;
     text-transform: uppercase;
     @include font-size(12px);
     letter-spacing: 1px;
     color: #fff;
     text-decoration: none;
+  }
+
+  .left-nav a:hover {
+    left: 1px;
+  }
+
+  .right-nav a:hover {
+    right: 1px;
   }
 }
 
