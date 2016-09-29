@@ -8,7 +8,7 @@ html,body {
   height: 100%;
 }
 
-body { background: #000; }
+body { background: #000; font-family: "canada-type-gibson"; font-weight: 200; }
 
 figure {
   margin: 0;
@@ -45,15 +45,28 @@ img {
     padding: 0;
   }
 
-  a {
-    text-transform: uppercase;
-    @include font-size(22px);
-    color: #fff;
+  li {
+    margin-bottom: 5px;
+  }
+
+  li:first-child a {
+    @include font-size(18px,true);
+  }
+
+  li.active {
+    text-decoration: line-through;
+  }
+
+  li:first-child.active {
     text-decoration: none;
   }
 
-  &:hover {
-    cursor: w-resize;
+  a {
+    text-transform: uppercase;
+    @include font-size(12px);
+    letter-spacing: 1px;
+    color: #fff;
+    text-decoration: none;
   }
 }
 

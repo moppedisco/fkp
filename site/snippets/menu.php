@@ -7,7 +7,7 @@ if($leftcol and $leftcol->count()):
   <ul>
     <li><a href="<?php echo url() ?>/"><?php echo $pages->find('fkp')->title() ?></a></li>
     <?php foreach($leftcol as $item): ?>
-    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?php echo $item->url() ?>"><?php echo $item->title()->html() ?></a></li>
+    <li <?php e($item->isOpen(), ' class="active"') ?>><a href="<?php echo $item->url() ?>"><?php echo $item->title()->html() ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>
@@ -22,7 +22,7 @@ if($rightcol and $rightcol->count()):
   <ul>
     <li><a href="<?php echo url() ?>/"><?php echo $pages->find('other-people-magazine')->title() ?></a></li>
     <?php foreach($rightcol as $item): ?>
-    <li><a<?php e($item->isOpen(), ' class="active"') ?> href="<?php echo $item->url() ?>"><?php echo $item->title()->html() ?></a></li>
+    <li <?php e($item->isOpen(), ' class="active"') ?>><a href="<?php echo $item->url() ?>"><?php echo $item->title()->html() ?></a></li>
     <?php endforeach ?>
   </ul>
 </nav>

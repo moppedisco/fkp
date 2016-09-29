@@ -7,6 +7,8 @@
 
     // Prevent same link == same url reload
     $('.main-nav a').on('click',function(e){
+      $(".main-nav li").removeClass('active');
+      $(this).parent().addClass('active');
       if(this.href === window.location.href) {
         e.preventDefault();
         e.stopPropagation();

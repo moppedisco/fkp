@@ -16,6 +16,6 @@
 
     ?>
   </div>
-  <?php echo js('assets/build/index.js') ?>
+  <?php echo js('assets/build/index.js') ?>  
 </body>
 </html>
