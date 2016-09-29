@@ -24,10 +24,6 @@
       lastElementClicked = el;
     });
 
-    Barba.Dispatcher.on('transitionCompleted', function(currentStatus, prevStatus) {
-      console.log(currentStatus);
-    });
-
     // Used for pages on the same side. Leftcol fade to leftcol or rightcol to rightcol
     var FadeTransition = Barba.BaseTransition.extend({
       start: function() {
@@ -133,7 +129,6 @@
         // } else if((prev.namespace === 'home' && next === 'rightcol') || (prev.namespace === 'rightcol' && next === 'home')){
         //   return true
         } else {
-          console.log('something');
           return false
         }
       }
@@ -194,7 +189,6 @@
           console.log(prev.namespace + ' to ' + next + " move right");
           return true
         } else {
-          console.log('something right');
           return false
         }
       }
@@ -242,14 +236,16 @@
           $elOld.css({
             visibility : 'visible',
             opacity : 1,
-            float: 'right',
+            right: '0',
+            left: 'auto',
             marginRight: "0%"
           });
 
           $elNew.css({
             visibility : 'visible',
             opacity : 1,
-            float: 'left',
+            left: '0',
+            right: 'auto',
             marginLeft: "-100%"
           });
 

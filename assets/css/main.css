@@ -52,6 +52,12 @@ html:before {
 * {
   box-sizing: border-box; }
 
+html {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 26.66667px;
+  line-height: 1.66667rem; }
+
 html, body {
   height: 100%; }
 
@@ -84,8 +90,6 @@ img {
   list-style: none;
   margin: 0;
   padding: 0; }
-.header li {
-  margin-bottom: 5px; }
 .header li:first-child a {
   font-size: 18px;
   font-size: 1.125rem;
@@ -125,8 +129,18 @@ img {
   height: 100%;
   position: absolute;
   top: 0;
-  left: 0; }
+  left: 0;
+  overflow: scroll; }
   .barba-container[data-namespace="home"] {
     left: -100%; }
+
+.content h1 {
+  font-size: 16px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 10px; }
 
 /*# sourceMappingURL=main.css.map */
