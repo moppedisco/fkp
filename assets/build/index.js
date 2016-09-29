@@ -1739,6 +1739,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
   function init(){
     barbaInit();
+
+    // Prevent same link == same url reload
+    $('.main-nav a').on('click',function(e){
+      if(this.href === window.location.href) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
   }
 
   function barbaInit(){
@@ -1747,6 +1755,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
     Barba.Dispatcher.on('linkClicked', function(el) {
       lastElementClicked = el;
+    });
+
+    Barba.Dispatcher.on('transitionCompleted', function(currentStatus, prevStatus) {
+      console.log(currentStatus);
     });
 
     // Used for pages on the same side. Leftcol fade to leftcol or rightcol to rightcol
@@ -1767,12 +1779,13 @@ return /******/ (function(modules) { // webpackBootstrap
         var $el = $(this.newContainer);
 
         $(this.oldContainer).hide();
-        var nextFloat = (Barba.HistoryManager.prevStatus().namespace == 'leftcol' ? "left" : "right");
+        var isLeft = (Barba.HistoryManager.prevStatus().namespace == 'leftcol' ? true : false);
 
         $el.css({
           visibility : 'visible',
           opacity : 0,
-          float: nextFloat
+          right: isLeft ? "auto" : 0,
+          left: isLeft ? 0 : "auto"
         });
 
         $el.animate({ opacity: 1 }, 400, function() {
@@ -1818,9 +1831,12 @@ return /******/ (function(modules) { // webpackBootstrap
         $el.css({
           visibility : 'visible',
           opacity : 1,
-          float: 'left',
+          left: '0',
+          right: 'auto',
           marginLeft: "-100%"
         });
+
+        $('.left-nav').animate({left: 400},600);
 
         return $(this.newContainer).animate({ marginLeft: "0%" }, 800, function() {
           _this.done();
@@ -1829,6 +1845,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
       closeBox: function() {
         var _this = this;
+
+        $('.left-nav').animate({left: 0},600);
 
         return $(this.oldContainer).animate({ marginLeft: "-100%" }, 800, function() {
           _this.done();
@@ -1873,10 +1891,13 @@ return /******/ (function(modules) { // webpackBootstrap
         var _this = this;
         var $el = $(this.newContainer);
 
+        $('.right-nav').animate({right: 400},600);
+
         $el.css({
           visibility : 'visible',
           opacity : 1,
-          float: 'right',
+          left: 'auto',
+          right: '0',
           marginRight: "-100%"
         });
 
@@ -1887,6 +1908,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
       closeBox: function() {
         var _this = this;
+
+        $('.right-nav').animate({right: 0},600);
 
         return $(this.oldContainer).animate({ marginRight: "-100%" }, 800, function() {
           _this.done();
@@ -1903,8 +1926,6 @@ return /******/ (function(modules) { // webpackBootstrap
         if((prev.namespace === 'home' && next === 'rightcol') || (prev.namespace === 'rightcol' && next === 'home')){
           console.log(prev.namespace + ' to ' + next + " move right");
           return true
-        // } else if((prev.namespace === 'home' && next === 'rightcol') || (prev.namespace === 'rightcol' && next === 'home')){
-        //   return true
         } else {
           console.log('something right');
           return false
@@ -1929,20 +1950,22 @@ return /******/ (function(modules) { // webpackBootstrap
           $elOld.css({
             visibility : 'visible',
             opacity : 1,
-            float: 'left',
+            left: '0',
+            right: 'auto',
             marginLeft: "0%"
           });
 
           $elNew.css({
             visibility : 'visible',
             opacity : 1,
-            float: 'right',
+            left: 'auto',
+            right: '0',
             marginRight: "-100%"
           });
 
-          $(this.oldContainer).animate({ marginLeft: "-100%" }, 800, function() {
-            // _this.done();
-          });
+          $(this.oldContainer).animate({ marginLeft: "-100%" }, 800);
+          $('.left-nav').animate({left: 0},600);
+          $('.right-nav').animate({right: 400},600);
 
           return $(this.newContainer).animate({ marginRight: "0%" }, 800, function() {
             _this.done();
@@ -1963,9 +1986,9 @@ return /******/ (function(modules) { // webpackBootstrap
             marginLeft: "-100%"
           });
 
-          $(this.oldContainer).animate({ marginRight: "-100%" }, 800, function() {
-            // _this.done();
-          });
+          $(this.oldContainer).animate({ marginRight: "-100%" }, 800);
+          $('.right-nav').animate({right: 0},600);
+          $('.left-nav').animate({left: 400},600);
 
           return $(this.newContainer).animate({ marginLeft: "0%" }, 800, function() {
             _this.done();
@@ -1994,6 +2017,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
     Barba.Pjax.getTransition = function() {
+
       if (FadeTransition.valid()) {
         return FadeTransition;
       }
@@ -2012,8 +2036,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
     };
 
+    var Leftcol = Barba.BaseView.extend({
+      namespace: 'leftcol',
+      onEnter: function() {
+          // The new Container is ready and attached to the DOM.
+      },
+      onEnterCompleted: function() {
+          // The Transition has just finished.
+      },
+      onLeave: function() {
+          // A new Transition toward a new page has just started.
+      },
+      onLeaveCompleted: function() {
+          // The Container has just been removed from the DOM.
+      }
+    });
+
+    // Don't forget to init the view!
+    Leftcol.init();
     Barba.Pjax.init();
     Barba.Prefetch.init();
+
   }
 
   function breakpoint() {
