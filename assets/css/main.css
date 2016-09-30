@@ -95,9 +95,9 @@ img {
   font-size: 1.125rem;
   line-height: 30px;
   line-height: 1.875rem; }
-.header li.active {
+.header li.active a {
   text-decoration: line-through; }
-.header li:first-child.active {
+.header li:first-child.active a {
   text-decoration: none; }
 .header li a {
   position: relative;
@@ -106,11 +106,18 @@ img {
   font-size: 0.75rem;
   letter-spacing: 1px;
   color: #fff;
-  text-decoration: none; }
+  text-decoration: none;
+  left: 0;
+  -webkit-transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+          transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+  display: inline-block; }
 .header .left-nav a:hover {
-  left: 1px; }
+  left: 3px; }
+.header .right-nav a {
+  left: auto;
+  right: 0; }
 .header .right-nav a:hover {
-  right: 1px; }
+  right: 3px; }
 
 .template--leftcol .barba-container {
   right: auto;

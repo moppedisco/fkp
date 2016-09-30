@@ -1764,7 +1764,7 @@ return /******/ (function(modules) { // webpackBootstrap
       start: function() {
         // As soon the loading is finished and the old page is faded out, let's fade the new page
         Promise
-          .all([this.newContainerLoading, this.fadeOut()])
+          .all([this.newContainerLoading])
           .then(this.fadeIn.bind(this));
       },
 
@@ -1775,20 +1775,23 @@ return /******/ (function(modules) { // webpackBootstrap
       fadeIn: function() {
         var _this = this;
         var $el = $(this.newContainer);
-
-        $(this.oldContainer).hide();
         var isLeft = (Barba.HistoryManager.prevStatus().namespace == 'leftcol' ? true : false);
 
         $el.css({
           visibility : 'visible',
-          opacity : 0,
+          opacity : 1,
+          top: "100%",
           right: isLeft ? "auto" : 0,
           left: isLeft ? 0 : "auto"
         });
 
-        $el.animate({ opacity: 1 }, 400, function() {
-          _this.done();
-        });
+        var moveUpAnim = new TimelineMax({onComplete: function(){
+          return _this.done();
+        }});
+
+        moveUpAnim
+          .to($(this.oldContainer), 1, {top:'-100%',ease: Power4.easeInOut},'open')
+          .to($(this.newContainer), 1, {top:'0',ease: Power4.easeInOut},'open');
       },
 
       valid: function() {
@@ -1834,21 +1837,24 @@ return /******/ (function(modules) { // webpackBootstrap
           marginLeft: "-100%"
         });
 
-        $('.left-nav').animate({left: 400},600);
+        var leftcolanim = new TimelineMax({onComplete: function(){
+          return _this.done();
+        }});
 
-        return $(this.newContainer).animate({ marginLeft: "0%" }, 800, function() {
-          _this.done();
-        });
+        leftcolanim
+          .to($('.left-nav'), 1, {left:'400',ease: Power4.easeInOut},'open')
+          .to($(this.newContainer), 1, {marginLeft:'0',ease: Power4.easeInOut},'open');
       },
 
       closeBox: function() {
         var _this = this;
+        var leftcolanim = new TimelineMax({onComplete: function(){
+          return _this.done();
+        }});
 
-        $('.left-nav').animate({left: 0},600);
-
-        return $(this.oldContainer).animate({ marginLeft: "-100%" }, 800, function() {
-          _this.done();
-        });
+        leftcolanim
+          .to($('.left-nav'), 1, {left:'0',ease: Power4.easeInOut},'close')
+          .to($(this.oldContainer), 1, {marginLeft:'-100%',ease: Power4.easeInOut},'close');
       },
 
       valid: function() {
@@ -1888,8 +1894,6 @@ return /******/ (function(modules) { // webpackBootstrap
         var _this = this;
         var $el = $(this.newContainer);
 
-        $('.right-nav').animate({right: 400},600);
-
         $el.css({
           visibility : 'visible',
           opacity : 1,
@@ -1898,19 +1902,26 @@ return /******/ (function(modules) { // webpackBootstrap
           marginRight: "-100%"
         });
 
-        return $(this.newContainer).animate({ marginRight: "0%" }, 800, function() {
-          _this.done();
-        });
+        var rightcolanim = new TimelineMax({onComplete: function(){
+          return _this.done();
+        }});
+
+        rightcolanim
+          .to($('.right-nav'), 1, {right:'400',ease: Power4.easeInOut},'open')
+          .to($(this.newContainer), 1, {marginRight:'0',ease: Power4.easeInOut},'open');
+
       },
 
       closeBox: function() {
         var _this = this;
+        var rightcolanim = new TimelineMax({onComplete: function(){
+          return _this.done();
+        }});
 
-        $('.right-nav').animate({right: 0},600);
+        rightcolanim
+          .to($('.right-nav'), 1, {right:'0',ease: Power4.easeInOut},'close')
+          .to($(this.oldContainer), 1, {marginRight:'-100%',ease: Power4.easeInOut},'close');
 
-        return $(this.oldContainer).animate({ marginRight: "-100%" }, 800, function() {
-          _this.done();
-        });
       },
 
       valid: function() {
@@ -1959,13 +1970,15 @@ return /******/ (function(modules) { // webpackBootstrap
             marginRight: "-100%"
           });
 
-          $(this.oldContainer).animate({ marginLeft: "-100%" }, 800);
-          $('.left-nav').animate({left: 0},600);
-          $('.right-nav').animate({right: 400},600);
+          var leftToRightanim = new TimelineMax({onComplete: function(){
+            return _this.done();
+          }});
 
-          return $(this.newContainer).animate({ marginRight: "0%" }, 800, function() {
-            _this.done();
-          });
+          leftToRightanim
+            .to($(this.oldContainer), 1, {marginLeft:'-100%',ease: Power4.easeInOut},'open')
+            .to($('.left-nav'), 1, {left:'0',ease: Power4.easeInOut},'open')
+            .to($('.right-nav'), 1, {right:'400px',ease: Power4.easeInOut},'open+=0.1')
+            .to($(this.newContainer), 1, {marginRight:'0%',ease: Power4.easeInOut},'open+=0.1');
 
         } else {
           $elOld.css({
@@ -1984,13 +1997,15 @@ return /******/ (function(modules) { // webpackBootstrap
             marginLeft: "-100%"
           });
 
-          $(this.oldContainer).animate({ marginRight: "-100%" }, 800);
-          $('.right-nav').animate({right: 0},600);
-          $('.left-nav').animate({left: 400},600);
+          var rightToLeftanim = new TimelineMax({onComplete: function(){
+            return _this.done();
+          }});
 
-          return $(this.newContainer).animate({ marginLeft: "0%" }, 800, function() {
-            _this.done();
-          });
+          rightToLeftanim
+            .to($(this.oldContainer), 1, {marginRight:'-100%',ease: Power4.easeInOut},'open')
+            .to($('.right-nav'), 1, {right:'0',ease: Power4.easeInOut},'open')
+            .to($('.left-nav'), 1, {left:'400px',ease: Power4.easeInOut},'open+=0.1')
+            .to($(this.newContainer), 1, {marginLeft:'0%',ease: Power4.easeInOut},'open+=0.1');
 
         }
 
