@@ -8,7 +8,7 @@
 
     snippet('video', array(
       'videos' => $videos,
-      'thumb'  => $page->images()->find('movie.jpg'),
+      'thumb'  => $site->images()->find('my-movie.jpg'),
       'controls' => false,
       'autoplay' => true,
       'loop' => true
@@ -16,6 +16,6 @@
 
     ?>
   </div>
-  <?php echo js('assets/build/index.js') ?>  
+  <?php echo js('assets/build/index.js') ?>
 </body>
 </html>

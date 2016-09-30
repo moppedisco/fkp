@@ -1,3 +1,11 @@
+html:before {
+  content: "desktop";
+  display: none;
+  /* Prevent from displaying. */ }
+
+@media (max-width: 767px) {
+  html:before {
+    content: "mobile"; } }
 h1, h2, h3, h4, h5, h6, hgroup,
 ul, ol, dl,
 blockquote, p, address,
@@ -8,17 +16,6 @@ pre, hr {
   margin-bottom: 28px;
   margin-bottom: 1.75rem; }
 
-html:before {
-  content: "desktop";
-  display: none;
-  /* Prevent from displaying. */ }
-
-@media (max-width: 768px) {
-  html:before {
-    content: "tablet"; } }
-@media (max-width: 480px) {
-  html:before {
-    content: "mobile"; } }
 .fullscreen-bg {
   position: fixed;
   top: 0;
@@ -27,13 +24,14 @@ html:before {
   left: 0;
   overflow: hidden;
   z-index: -100; }
-
-.fullscreen-bg video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; }
+  .fullscreen-bg video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+  .fullscreen-bg img {
+    display: none; }
 
 @media (min-aspect-ratio: 16 / 9) {
   .fullscreen-bg video {
@@ -44,11 +42,11 @@ html:before {
     width: 300%;
     left: -100%; } }
 @media (max-width: 767px) {
-  .fullscreen-bg {
-    background: url("../img/videoframe.jpg") center center/cover no-repeat; }
-
   .fullscreen-bg video {
-    display: none; } }
+    display: none; }
+
+  .fullscreen-bg img {
+    display: block; } }
 * {
   box-sizing: border-box; }
 
@@ -58,8 +56,11 @@ html {
   line-height: 26.66667px;
   line-height: 1.66667rem; }
 
-html, body {
-  height: 100%; }
+@media (max-width: 767px) {
+  html,
+  body {
+    height: 100%;
+    width: 100%; } }
 
 body {
   background: #000;
@@ -76,48 +77,51 @@ img {
   max-width: 100%;
   height: auto; }
 
-.header .main-nav {
-  margin: 0;
-  padding: 40px;
-  position: absolute;
-  top: 0;
-  left: 0; }
-  .header .main-nav.right-nav {
+.main-nav {
+  margin: 20px; }
+  .main-nav ul, .main-nav li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+  @media (min-width: 767px) {
+    .main-nav {
+      margin: 0;
+      padding: 40px;
+      position: absolute;
+      top: 0;
+      left: 0; }
+      .main-nav.right-nav {
+        left: auto;
+        right: 0;
+        text-align: right; } }
+  .main-nav li:first-child a {
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 30px;
+    line-height: 1.875rem; }
+  .main-nav li.active a {
+    text-decoration: line-through; }
+  .main-nav li:first-child.active a {
+    text-decoration: none; }
+  .main-nav li a {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: #fff;
+    text-decoration: none;
+    left: 0;
+    -webkit-transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+            transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    display: inline-block; }
+  .main-nav.left-nav a:hover {
+    left: 3px; }
+  .main-nav.right-nav a {
     left: auto;
-    right: 0;
-    text-align: right; }
-.header ul, .header li {
-  list-style: none;
-  margin: 0;
-  padding: 0; }
-.header li:first-child a {
-  font-size: 18px;
-  font-size: 1.125rem;
-  line-height: 30px;
-  line-height: 1.875rem; }
-.header li.active a {
-  text-decoration: line-through; }
-.header li:first-child.active a {
-  text-decoration: none; }
-.header li a {
-  position: relative;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-size: 0.75rem;
-  letter-spacing: 1px;
-  color: #fff;
-  text-decoration: none;
-  left: 0;
-  -webkit-transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-          transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-  display: inline-block; }
-.header .left-nav a:hover {
-  left: 3px; }
-.header .right-nav a {
-  left: auto;
-  right: 0; }
-.header .right-nav a:hover {
-  right: 3px; }
+    right: 0; }
+  .main-nav.right-nav a:hover {
+    right: 3px; }
 
 .template--leftcol .barba-container {
   right: auto;
@@ -143,8 +147,17 @@ img {
   top: 0;
   left: 0;
   overflow: scroll; }
+  @media (max-width: 767px) {
+    .barba-container {
+      max-width: none; } }
   .barba-container[data-namespace="home"] {
     left: -100%; }
+  @media (max-width: 767px) {
+    .barba-container {
+      position: static;
+      height: auto;
+      width: auto;
+      padding: 20px; } }
 
 .content h1 {
   font-size: 16px;

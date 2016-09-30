@@ -3,7 +3,15 @@
   var $window = $(window);
 
   function init(){
-    barbaInit();
+
+    breakpoint();
+
+    if(window.breakpoint != 'mobile'){
+      barbaInit();
+      console.log('everywhere except mobile')
+    } else {
+      console.log('no barba');
+    }
 
     // Prevent same link == same url reload
     $('.main-nav a').on('click',function(e){

@@ -8,11 +8,19 @@ html {
   @include font-size(16px,true);
 }
 
-html,body {
-  height: 100%;
+html,
+body {
+  @media (max-width: 767px) {
+    height: 100%;
+    width: 100%;
+  }
 }
 
-body { background: #000; font-family: "canada-type-gibson"; font-weight: 200; }
+body {
+  background: #000;
+  font-family: "canada-type-gibson";
+  font-weight: 200;
+}
 
 figure {
   margin: 0;
@@ -27,9 +35,16 @@ img {
   height: auto;
 }
 
-.header {
+.main-nav {
+  margin: 20px;
 
-  .main-nav {
+  ul,li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 767px) {
     margin: 0;
     padding: 40px;
     position: absolute;
@@ -41,12 +56,6 @@ img {
       right: 0;
       text-align: right;
     }
-  }
-
-  ul,li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 
   li:first-child a {
@@ -73,12 +82,13 @@ img {
     display: inline-block;
   }
 
-  .left-nav a:hover {
+  &.left-nav a:hover {
     left: 3px;
   }
 
-  .right-nav a { left: auto; right: 0; }
-  .right-nav a:hover { right: 3px; }
+  &.right-nav a { left: auto; right: 0; }
+  &.right-nav a:hover { right: 3px; }
+
 }
 
 .template--leftcol {
@@ -115,8 +125,19 @@ img {
   left: 0;
   overflow: scroll;
 
+  @media (max-width: 767px) {
+    max-width: none;
+  }
+
   &[data-namespace="home"] {
     left: -100%;
+  }
+
+  @media (max-width: 767px) {
+    position: static;
+    height: auto;
+    width: auto;
+    padding: 20px;
   }
 }
 

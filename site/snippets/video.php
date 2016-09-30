@@ -17,9 +17,9 @@ $loop = ($loop) ? ' loop' : '';
 ?>
 <video width="<?php echo $width ?>" height="<?php echo $height ?>"<?php echo $preload . $controls . $autoplay . $loop ?>>
   <?php foreach($videos as $video): ?>
-  <source src="<?php echo $video->url() ?>" type="<?php echo $video->mime() ?>" />
+  <source poster="<?php echo $thumb->url() ?>" src="<?php echo $video->url() ?>" type="<?php echo $video->mime() ?>" />
   <?php endforeach ?>
-  <?php if(isset($thumb)): ?>
-  <img src="<?php echo $thumb->url() ?>" alt="<?php echo $thumb->title() ?>" />
-  <?php endif ?>
 </video>
+<?php if(isset($thumb)): ?>
+<img src="<?php echo $thumb->url() ?>" alt="<?php echo $thumb->title() ?>" />
+<?php endif ?>
