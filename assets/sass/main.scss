@@ -44,6 +44,11 @@ img {
     padding: 0;
   }
 
+  ul { display: none; }
+  &.active ul,
+  .template--rightcol & ul,
+  .template--leftcol & ul { display: block; }
+
   @media (min-width: 767px) {
     margin: 0;
     padding: 40px;
@@ -58,16 +63,16 @@ img {
     }
   }
 
-  li:first-child a {
+  > a {
     @include font-size(18px,true);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
   }
 
   li.active a {
     text-decoration: line-through;
-  }
-
-  li:first-child.active a {
-    text-decoration: none;
   }
 
   li a {

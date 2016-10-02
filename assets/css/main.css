@@ -83,6 +83,10 @@ img {
     list-style: none;
     margin: 0;
     padding: 0; }
+  .main-nav ul {
+    display: none; }
+  .main-nav.active ul, .template--rightcol .main-nav ul, .template--leftcol .main-nav ul {
+    display: block; }
   @media (min-width: 767px) {
     .main-nav {
       margin: 0;
@@ -94,15 +98,17 @@ img {
         left: auto;
         right: 0;
         text-align: right; } }
-  .main-nav li:first-child a {
+  .main-nav > a {
     font-size: 18px;
     font-size: 1.125rem;
     line-height: 30px;
-    line-height: 1.875rem; }
+    line-height: 1.875rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none; }
   .main-nav li.active a {
     text-decoration: line-through; }
-  .main-nav li:first-child.active a {
-    text-decoration: none; }
   .main-nav li a {
     position: relative;
     text-transform: uppercase;
