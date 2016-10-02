@@ -2104,9 +2104,18 @@ return /******/ (function(modules) { // webpackBootstrap
       }
     });
 
+    var Home = Barba.BaseView.extend({
+      namespace: 'home',
+      onEnterCompleted: function() {
+        $("body").attr('class','').addClass('template--home');
+      }
+    });
+
+
     // Don't forget to init the view!
     Leftcol.init();
     Rightcol.init();
+    Home.init();
     Barba.Prefetch.init();
     Barba.Pjax.init();
   }
