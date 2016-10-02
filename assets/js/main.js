@@ -94,13 +94,17 @@
 
       valid: function() {
         var prev = Barba.HistoryManager.prevStatus().namespace;
-        // var isBackButton = (lastElementClicked == oldElementClicked ? true : false);
-        // console.log(oldElementClicked);
+        var isBackButton = (lastElementClicked == oldElementClicked ? true : false);
+        console.log(isBackButton);
         var isRightSide = $(lastElementClicked).parents('nav').hasClass('right-nav');
         var isHome = $(lastElementClicked).hasClass('back-home');
-            // isHome = (isBackButton ? isBackButton : isHome);
+            isHome = (isBackButton ? isBackButton : isHome);
+            console.log(lastElementClicked);
         var next = (isRightSide ? "rightcol" : "leftcol");
             next = (isHome ? "home" : next);
+
+        console.log(prev);
+        console.log(next);
 
         if((prev === 'leftcol' && next === 'leftcol') || (prev === 'rightcol' && next === 'rightcol')){
           return true
@@ -160,8 +164,10 @@
 
       valid: function() {
         var prev = Barba.HistoryManager.prevStatus();
+        var isBackButton = (lastElementClicked == oldElementClicked ? true : false);
         var isRightSide = $(lastElementClicked).parents('nav').hasClass('right-nav');
         var isHome = $(lastElementClicked).hasClass('back-home');
+            isHome = (isBackButton ? isBackButton : isHome);
         var next = (isRightSide ? "rightcol" : "leftcol");
             next = (isHome ? "home" : next);
 
@@ -351,25 +357,23 @@
 
     var Leftcol = Barba.BaseView.extend({
       namespace: 'leftcol',
-      onEnter: function() {
-          // The new Container is ready and attached to the DOM.
-      },
       onEnterCompleted: function() {
-          // The Transition has just finished.
-      },
-      onLeave: function() {
-          // A new Transition toward a new page has just started.
-      },
-      onLeaveCompleted: function() {
-          // The Container has just been removed from the DOM.
+        $("body").attr('class','').addClass('template--leftcol');
+      }
+    });
+
+    var Rightcol = Barba.BaseView.extend({
+      namespace: 'rightcol',
+      onEnterCompleted: function() {
+        $("body").attr('class','').addClass('template--rightcol');
       }
     });
 
     // Don't forget to init the view!
     Leftcol.init();
-    Barba.Pjax.init();
+    Rightcol.init();
     Barba.Prefetch.init();
-
+    Barba.Pjax.init();
   }
 
   function breakpoint() {

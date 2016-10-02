@@ -85,7 +85,7 @@ img {
     padding: 0; }
   .main-nav ul {
     display: none; }
-  .main-nav.active ul, .template--rightcol .main-nav ul, .template--leftcol .main-nav ul {
+  .main-nav.active ul {
     display: block; }
   @media (min-width: 767px) {
     .main-nav {

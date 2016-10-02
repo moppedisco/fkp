@@ -45,9 +45,7 @@ img {
   }
 
   ul { display: none; }
-  &.active ul,
-  .template--rightcol & ul,
-  .template--leftcol & ul { display: block; }
+  &.active ul { display: block; }
 
   @media (min-width: 767px) {
     margin: 0;
