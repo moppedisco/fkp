@@ -1,3 +1,4 @@
+@import '_lightgallery.scss';
 @import '_fonts.scss';
 @import '_helpers.scss';
 
@@ -44,7 +45,12 @@ img {
     padding: 0;
   }
 
-  ul { display: none; }
+  ul {
+    display: none;
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
   &.active ul { display: block; }
 
   @media (min-width: 767px) {
@@ -84,7 +90,7 @@ img {
 
 .close-button {
   position: absolute;
-  top: 0;  
+  top: 0;
   background: none;
   border: none;
   @include font-size(8px);
@@ -102,6 +108,10 @@ img {
 
   &:focus {
     outline: none;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
   }
 }
 
@@ -138,11 +148,19 @@ img {
   .template--rightcol & {
     cursor: e-resize;
     opacity: 0.3;
+
+    @media (max-width: 767px) {
+      opacity: 1;
+    }
   }
 
   .template--leftcol & {
     cursor: w-resize;
     opacity: 0.3;
+
+    @media (max-width: 767px) {
+      opacity: 1;
+    }
   }
 
 }
@@ -181,4 +199,25 @@ img {
   letter-spacing: 1px;
   text-align: center;
   margin-bottom: 10px;
+}
+
+.project-list__item {
+  margin-bottom: 20px;
+}
+
+.project-list-image {
+  display: none;
+
+  &:first-child {
+    display: block;
+  }
+}
+
+.lg-toolbar,
+.lg-sub-html {
+  display: none;
+}
+
+.lg-backdrop {
+  background: rgba(255,255,255,0.5);
 }

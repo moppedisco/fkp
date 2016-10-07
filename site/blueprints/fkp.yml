@@ -1,6 +1,8 @@
 title: Fkp
 pages:
-  template: leftcol
+  template:
+    - projects
+    - leftcol
 files: false
 fields:
   title:

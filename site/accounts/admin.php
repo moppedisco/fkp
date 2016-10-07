@@ -7,8 +7,8 @@ email: yacbel@gmail.com
 language: en
 role: admin
 history:
-  - fkp/work
-  - fkp/about
-  - other-people-magazine/film
-  - fkp/film
-  - other-people-magazine/magazine
+  - fkp/projects/subpages-to-projcets
+  - fkp/projects/another-project-file
+  - fkp/projects/subpage-2
+  - fkp/projects
+  - other-people-magazine/opmfilm
