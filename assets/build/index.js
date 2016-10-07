@@ -1833,13 +1833,13 @@ return /******/ (function(modules) { // webpackBootstrap
         console.log(isBackButton);
         var isRightSide = $(lastElementClicked).parents('nav').hasClass('right-nav');
         var isHome = $(lastElementClicked).hasClass('back-home');
-            isHome = (isBackButton ? isBackButton : isHome);
-            console.log(lastElementClicked);
+            // isHome = (isBackButton ? isBackButton : isHome);
         var next = (isRightSide ? "rightcol" : "leftcol");
             next = (isHome ? "home" : next);
 
-        console.log(prev);
-        console.log(next);
+        console.log(Barba.HistoryManager.history[Barba.HistoryManager.history.length-1]['namespace']);
+        // console.log(prev);
+        // console.log(next);
 
         if((prev === 'leftcol' && next === 'leftcol') || (prev === 'rightcol' && next === 'rightcol')){
           return true
