@@ -215,7 +215,13 @@ img {
 
 .lg-toolbar,
 .lg-sub-html {
-  display: none;
+  background: none;
+}
+
+#lg-counter { display: none; }
+.lg-close:after {
+  content:"✕" !important;
+  color: #000;
 }
 
 .lg-backdrop {

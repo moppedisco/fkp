@@ -1754,6 +1754,12 @@ return /******/ (function(modules) { // webpackBootstrap
         e.preventDefault();
         e.stopPropagation();
       });
+    } else {
+      $(".project-list-images").lightGallery({
+        showThumbByDefault: false,
+        controls: false,
+        download: false
+      });
     }
   }
 
@@ -1861,7 +1867,8 @@ return /******/ (function(modules) { // webpackBootstrap
         if($('.project-list-images img')){
           $(".project-list-images").lightGallery({
             showThumbByDefault: false,
-            controls: false
+            controls: false,
+            download: false
           });
         }
       }
