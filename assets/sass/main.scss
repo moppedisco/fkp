@@ -1,11 +1,12 @@
-@import 'helpers.scss';
+@import '_fonts.scss';
+@import '_helpers.scss';
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  @include font-size(16px,true);
+  @include font-size(14px,true);
 }
 
 html,
@@ -17,22 +18,21 @@ body {
 }
 
 body {
-  background: #000;
-  font-family: "canada-type-gibson";
-  font-weight: 200;
+  background: #fff;
+  font-family: 'Consolas';
 }
 
 figure {
   margin: 0;
 }
 
-video {
-  opacity: 0.3;
-}
-
 img {
   max-width: 100%;
   height: auto;
+}
+
+.main {
+  z-index: 10;
 }
 
 .main-nav {
@@ -52,11 +52,11 @@ img {
     padding: 40px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 100px;
 
     &.right-nav {
       left: auto;
-      right: 0;
+      right: 100px;
       text-align: right;
     }
   }
@@ -69,28 +69,16 @@ img {
     text-decoration: none;
   }
 
-  li.active a {
-    text-decoration: line-through;
-  }
-
   li a {
     position: relative;
     text-transform: uppercase;
-    @include font-size(12px);
+    @include font-size(18px);
     letter-spacing: 1px;
     color: #fff;
     text-decoration: none;
     left: 0;
-    transition: all 0.2s cubic-bezier(.19,1,.22,1);
     display: inline-block;
   }
-
-  &.left-nav a:hover {
-    left: 3px;
-  }
-
-  &.right-nav a { left: auto; right: 0; }
-  &.right-nav a:hover { right: 3px; }
 
 }
 
@@ -99,11 +87,6 @@ img {
     right: auto;
     left: 0;
   }
-
-  .main-nav.left-nav {
-    left: 400px;
-    right: auto;
-  }
 }
 
 .template--rightcol {
@@ -111,10 +94,24 @@ img {
     right: 0;
     left: auto;
   }
-  .main-nav.right-nav {
-    left: auto;
-    right: 400px;
+}
+
+.close-button {
+}
+
+.fullscreen-bg {
+  background: #fff;
+
+  .template--rightcol & {
+    cursor: e-resize;
+    opacity: 0.3;
   }
+
+  .template--leftcol & {
+    cursor: w-resize;
+    opacity: 0.3;
+  }
+
 }
 
 .barba-container {
@@ -133,7 +130,7 @@ img {
   }
 
   &[data-namespace="home"] {
-    left: -100%;
+    transform: translateX(-100%);
   }
 
   @media (max-width: 767px) {

@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'Consolas';
+  src: url("../fonts/Consolas.eot");
+  src: url("../fonts/Consolas.eot?#iefix") format("embedded-opentype"), url("../fonts/Consolas.woff") format("woff"), url("../fonts/Consolas.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Consolas Bold';
+  src: url("../fonts/Consolas-Bold.eot");
+  src: url("../fonts/Consolas-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Consolas-Bold.woff") format("woff"), url("../fonts/Consolas-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal; }
+@font-face {
+  font-family: 'Consolas Italic';
+  src: url("../fonts/Consolas-Italic.eot");
+  src: url("../fonts/Consolas-Italic.eot?#iefix") format("embedded-opentype"), url("../fonts/Consolas-Italic.woff") format("woff"), url("../fonts/Consolas-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic; }
+@font-face {
+  font-family: 'Consolas Bold Italic';
+  src: url("../fonts/Consolas-BoldItalic.eot");
+  src: url("../fonts/Consolas-BoldItalic.eot?#iefix") format("embedded-opentype"), url("../fonts/Consolas-BoldItalic.woff") format("woff"), url("../fonts/Consolas-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic; }
 html:before {
   content: "desktop";
   display: none;
@@ -51,10 +75,10 @@ pre, hr {
   box-sizing: border-box; }
 
 html {
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 26.66667px;
-  line-height: 1.66667rem; }
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 23.33333px;
+  line-height: 1.45833rem; }
 
 @media (max-width: 767px) {
   html,
@@ -63,19 +87,18 @@ html {
     width: 100%; } }
 
 body {
-  background: #000;
-  font-family: "canada-type-gibson";
-  font-weight: 200; }
+  background: #fff;
+  font-family: 'Consolas'; }
 
 figure {
   margin: 0; }
 
-video {
-  opacity: 0.3; }
-
 img {
   max-width: 100%;
   height: auto; }
+
+.main {
+  z-index: 10; }
 
 .main-nav {
   margin: 20px; }
@@ -93,10 +116,10 @@ img {
       padding: 40px;
       position: absolute;
       top: 0;
-      left: 0; }
+      left: 100px; }
       .main-nav.right-nav {
         left: auto;
-        right: 0;
+        right: 100px;
         text-align: right; } }
   .main-nav > a {
     font-size: 18px;
@@ -107,41 +130,33 @@ img {
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none; }
-  .main-nav li.active a {
-    text-decoration: line-through; }
   .main-nav li a {
     position: relative;
     text-transform: uppercase;
-    font-size: 12px;
-    font-size: 0.75rem;
+    font-size: 18px;
+    font-size: 1.125rem;
     letter-spacing: 1px;
     color: #fff;
     text-decoration: none;
     left: 0;
-    -webkit-transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
-            transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
     display: inline-block; }
-  .main-nav.left-nav a:hover {
-    left: 3px; }
-  .main-nav.right-nav a {
-    left: auto;
-    right: 0; }
-  .main-nav.right-nav a:hover {
-    right: 3px; }
 
 .template--leftcol .barba-container {
   right: auto;
   left: 0; }
-.template--leftcol .main-nav.left-nav {
-  left: 400px;
-  right: auto; }
 
 .template--rightcol .barba-container {
   right: 0;
   left: auto; }
-.template--rightcol .main-nav.right-nav {
-  left: auto;
-  right: 400px; }
+
+.fullscreen-bg {
+  background: #fff; }
+  .template--rightcol .fullscreen-bg {
+    cursor: e-resize;
+    opacity: 0.3; }
+  .template--leftcol .fullscreen-bg {
+    cursor: w-resize;
+    opacity: 0.3; }
 
 .barba-container {
   background: #fff;
@@ -157,7 +172,8 @@ img {
     .barba-container {
       max-width: none; } }
   .barba-container[data-namespace="home"] {
-    left: -100%; }
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%); }
   @media (max-width: 767px) {
     .barba-container {
       position: static;

@@ -10,40 +10,10 @@
       barbaInit();
     }
 
-    // var menuAnimLeft = new TimelineMax({paused: true, reversed: true});
-    // var menuAnimRight = new TimelineMax({paused: true, reversed: true});
-    // menuAnimLeft.staggerFrom($('.left-nav li'), 0.5, {y:'-3px', autoAlpha:'0',ease: Power4.easeOut},'0.1');
-    // menuAnimRight.staggerFrom($('.right-nav li'), 0.5, {y:'-3px', autoAlpha:'0',ease: Power4.easeOut},'0.1');
-
     $('.main-nav a.back-home').on('click',function(e){
-
-      // $(this).parents('.main-nav').removeClass('active');
       $(this).parent().toggleClass('active');
-
-      // if($(this).parent().hasClass('left-nav')){
-      //   menuAnimLeft.reversed() ? menuAnimLeft.play() : menuAnimLeft.reverse();
-      //   menuAnimRight.reversed() ? menuAnimRight.pause(0) : menuAnimRight.reverse();
-      // } else {
-      //   menuAnimRight.reversed() ? menuAnimRight.play() : menuAnimRight.reverse();
-      //   menuAnimLeft.reversed() ? menuAnimLeft.pause(0) : menuAnimLeft.reverse();
-      // }
-
-      $(".main-nav li").removeClass('active');
-
-      if(this.href === window.location.href) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    });
-
-    // Prevent same link == same url reload
-    $('.main-nav ul a').on('click',function(e){
-      $(".main-nav li").removeClass('active');
-      $(this).parent().toggleClass('active');
-      if(this.href === window.location.href) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
+      e.preventDefault();
+      e.stopPropagation();
     });
   }
 
@@ -94,17 +64,10 @@
 
       valid: function() {
         var prev = Barba.HistoryManager.prevStatus().namespace;
-        var isBackButton = (lastElementClicked == oldElementClicked ? true : false);
-        console.log(isBackButton);
         var isRightSide = $(lastElementClicked).parents('nav').hasClass('right-nav');
         var isHome = $(lastElementClicked).hasClass('back-home');
-            // isHome = (isBackButton ? isBackButton : isHome);
         var next = (isRightSide ? "rightcol" : "leftcol");
             next = (isHome ? "home" : next);
-
-        console.log(Barba.HistoryManager.history[Barba.HistoryManager.history.length-1]['namespace']);
-        // console.log(prev);
-        // console.log(next);
 
         if((prev === 'leftcol' && next === 'leftcol') || (prev === 'rightcol' && next === 'rightcol')){
           return true
@@ -180,7 +143,7 @@
       }
     });
 
-    var columnTransitionRight = Barba.BaseTransition.extend({
+    var columnTransition = Barba.BaseTransition.extend({
       start: function() {
         var open = (this.oldContainer.dataset.namespace == "home" ? true : false);
 
@@ -198,46 +161,57 @@
       openBox: function() {
         var _this = this;
         var $el = $(this.newContainer);
+        var isLeftSide = $(lastElementClicked).parents('nav').hasClass('left-nav');
+        console.log(Barba.HistoryManager.prevStatus());
+        var $nav = (isLeftSide ? $('.right-nav') : $('.left-nav'));
+
+        $nav.css({
+          zIndex : '-110'
+        });
 
         $el.css({
           visibility : 'visible',
           opacity : 1,
-          left: 'auto',
-          right: '0',
-          marginRight: "-100%"
+          left: (isLeftSide ? '0' : 'auto'),
+          right: (isLeftSide ? 'auto' : '0'),
+          transform: (isLeftSide ? 'translateX(-100%)' : 'translateX(100%)')
         });
 
-        var rightcolanim = new TimelineMax({onComplete: function(){
+        var openColumnAnimation = new TimelineMax({onComplete: function(){
           return _this.done();
         }});
 
-        rightcolanim
-          .to($('.right-nav'), 1, {right:'400',ease: Power4.easeInOut},'open')
-          .to($(this.newContainer), 1, {marginRight:'0',ease: Power4.easeInOut},'open');
+        openColumnAnimation
+          .to('.fullscreen-bg', 1, {opacity:'0.3',ease: Power4.easeInOut},'open')
+          .to($(this.newContainer), 1, {x:'0',ease: Power4.easeInOut},'open');
 
       },
 
       closeBox: function() {
         var _this = this;
-        var rightcolanim = new TimelineMax({onComplete: function(){
+        var isLeftSide = (Barba.HistoryManager.prevStatus().namespace == 'leftcol' ? true : false);
+        var $nav = (isLeftSide ? $('.right-nav') : $('.left-nav'));
+
+        $nav.css({
+          zIndex : ''
+        });
+
+        var closeColumnAnimation = new TimelineMax({onComplete: function(){
           return _this.done();
         }});
 
-        rightcolanim
-          .to($('.right-nav'), 1, {right:'0',ease: Power4.easeInOut},'close')
-          .to($(this.oldContainer), 1, {marginRight:'-100%',ease: Power4.easeInOut},'close');
+        var hideColumnValue = (isLeftSide ? '-100%' : '100%');
+
+        closeColumnAnimation
+          .to('.fullscreen-bg', 1, {opacity:'1',ease: Power4.easeInOut},'close')
+          .to($(this.oldContainer), 1, {x:hideColumnValue,ease: Power4.easeInOut},'close');
 
       },
 
       valid: function() {
         var prev = Barba.HistoryManager.prevStatus();
-        var isLeftSide = $(lastElementClicked).parents('nav').hasClass('left-nav');
-        var isHome = $(lastElementClicked).hasClass('back-home');
-        var next = (isLeftSide ? "leftcol" : "rightcol");
-            next = (isHome ? "home" : next);
 
-        if((prev.namespace === 'home' && next === 'rightcol') || (prev.namespace === 'rightcol' && next === 'home')){
-          // console.log(prev.namespace + ' to ' + next + " move right");
+        if(prev.namespace === 'home' || prev.namespace === 'leftcol' || prev.namespace === 'rightcol'){
           return true
         } else {
           return false
@@ -333,25 +307,10 @@
 
     Barba.Pjax.getTransition = function() {
 
-      if (verticalTransition.valid()) {
-        console.log('vert');
-        return verticalTransition;
+      if (columnTransition.valid()) {
+        return columnTransition;
       }
 
-      if (columnTransitionLeft.valid()) {
-        console.log('left');
-        return columnTransitionLeft;
-      }
-
-      if (columnTransitionRight.valid()) {
-        console.log('right');
-        return columnTransitionRight;
-      }
-
-      if (columnTransitionSideToSide.valid()) {
-        console.log('side');
-        return columnTransitionSideToSide;
-      }
       console.log("else");
     };
 
@@ -359,6 +318,9 @@
       namespace: 'leftcol',
       onEnterCompleted: function() {
         $("body").attr('class','').addClass('template--leftcol');
+        $('.fullscreen-bg').on('click',function(){
+          window.history.back();
+        });
       }
     });
 
@@ -366,6 +328,9 @@
       namespace: 'rightcol',
       onEnterCompleted: function() {
         $("body").attr('class','').addClass('template--rightcol');
+        $('.fullscreen-bg').on('click',function(){
+          window.history.back();
+        });
       }
     });
 
@@ -373,6 +338,7 @@
       namespace: 'home',
       onEnterCompleted: function() {
         $("body").attr('class','').addClass('template--home');
+        $('.fullscreen-bg').unbind( "click" );
       }
     });
 
