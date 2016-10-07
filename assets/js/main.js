@@ -318,7 +318,7 @@
       namespace: 'leftcol',
       onEnterCompleted: function() {
         $("body").attr('class','').addClass('template--leftcol');
-        $('.fullscreen-bg').on('click',function(){
+        $('.fullscreen-bg,.close-button').on('click',function(){
           window.history.back();
         });
       }
@@ -328,7 +328,7 @@
       namespace: 'rightcol',
       onEnterCompleted: function() {
         $("body").attr('class','').addClass('template--rightcol');
-        $('.fullscreen-bg').on('click',function(){
+        $('.fullscreen-bg,.close-button').on('click',function(){
           window.history.back();
         });
       }
@@ -338,7 +338,7 @@
       namespace: 'home',
       onEnterCompleted: function() {
         $("body").attr('class','').addClass('template--home');
-        $('.fullscreen-bg').unbind( "click" );
+        $('.fullscreen-bg,.close-button').unbind( "click" );
       }
     });
 

@@ -141,13 +141,42 @@ img {
     left: 0;
     display: inline-block; }
 
+.close-button {
+  position: absolute;
+  top: 0;
+  background: none;
+  border: none;
+  font-size: 8px;
+  font-size: 0.5rem;
+  -webkit-transition: all 0.3s;
+          transition: all 0.3s;
+  opacity: 0;
+  z-index: -1;
+  padding: 0;
+  width: 30px;
+  height: 30px; }
+  .close-button:hover {
+    -webkit-transition: all 0.1s;
+            transition: all 0.1s;
+    opacity: 0.3 !important; }
+  .close-button:focus {
+    outline: none; }
+
 .template--leftcol .barba-container {
   right: auto;
   left: 0; }
+.template--leftcol .close-button {
+  left: 370px;
+  opacity: 1;
+  z-index: 1; }
 
 .template--rightcol .barba-container {
   right: 0;
   left: auto; }
+.template--rightcol .close-button {
+  right: 370px;
+  opacity: 1;
+  z-index: 1; }
 
 .fullscreen-bg {
   background: #fff; }
