@@ -10,15 +10,12 @@
       barbaInit();
 
       $('.main-nav a.back-home').on('click',function(e){
+        var $siblingMenu = $(this).parent().siblings();
+        if($siblingMenu.hasClass('active')) { $siblingMenu.removeClass('active') };
+        // ($('.main-nav').hasClass('') ? $('.right-nav') : $('.left-nav'));
         $(this).parent().toggleClass('active');
         e.preventDefault();
         e.stopPropagation();
-      });
-    } else {
-      $(".project-list-images").lightGallery({
-        showThumbByDefault: false,
-        controls: false,
-        download: false
       });
     }
   }
@@ -125,10 +122,18 @@
 
         // Create gallery on project page
         if($('.project-list-images img')){
-          $(".project-list-images").lightGallery({
-            showThumbByDefault: false,
-            controls: false,
-            download: false
+          var $lg = $(".project-list-images");
+          $lg.each(function(index){
+            $(this).lightGallery({
+              showThumbByDefault: false,
+              controls: false,
+              download: false,
+              mode: 'lg-fade'
+            });
+
+            $(this).on('onSlideClick.lg',function(event, index, fromTouch, fromThumb){
+              $(this).data('lightGallery').goToNextSlide();
+            });
           });
         }
       }

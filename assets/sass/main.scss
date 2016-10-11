@@ -92,6 +92,7 @@ img {
 }
 
 .close-button {
+  display: none;
   position: absolute;
   top: 0;
   background: none;
@@ -206,6 +207,12 @@ img {
 
 .project-list__item {
   margin-bottom: 20px;
+
+  video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 .project-list-image {
@@ -213,6 +220,13 @@ img {
 
   &:first-child {
     display: block;
+  }
+}
+
+.lg-img-wrap {
+  img.lg-object.lg-image  {
+    max-width: 60vw !important;
+    height: auto !important;
   }
 }
 

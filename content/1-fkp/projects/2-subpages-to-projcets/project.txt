@@ -3,3 +3,6 @@ Title: Subpages to projcets
 ----
 
 Text: 
+
+(image: build1.jpg) Det er ok
+(image: build2.jpg)(image: build3.jpg)
