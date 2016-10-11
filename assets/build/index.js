@@ -2047,6 +2047,23 @@ return /******/ (function(modules) { // webpackBootstrap
         e.preventDefault();
         e.stopPropagation();
       });
+    } else {
+      // Create gallery on project page
+      if($('.project-list-images img')){
+        var $lg = $(".project-list-images");
+        $lg.each(function(index){
+          $(this).lightGallery({
+            showThumbByDefault: false,
+            controls: false,
+            download: false,
+            mode: 'lg-fade'
+          });
+
+          $(this).on('onSlideClick.lg',function(event, index, fromTouch, fromThumb){
+            $(this).data('lightGallery').goToNextSlide();
+          });
+        });
+      }      
     }
   }
 
