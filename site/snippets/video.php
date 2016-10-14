@@ -9,15 +9,16 @@ if(!isset($preload))  $preload  = true;
 if(!isset($controls)) $controls = true;
 if(!isset($autoplay)) $autoplay = true;
 if(!isset($loop)) $loop = true;
+if(!isset($cssClasses)) $cssClasses = '';
 // build the html tags for the video element
 $preload  = ($preload)  ? ' preload="preload"'   : '';
 $controls = ($controls) ? ' controls="controls"' : '';
 $autoplay = ($autoplay) ? ' autoplay' : '';
 $loop = ($loop) ? ' loop' : '';
 ?>
-<video width="<?php echo $width ?>" height="<?php echo $height ?>"<?php echo $preload . $controls . $autoplay . $loop ?>>
+<video class="<?php echo $cssClasses ?>" width="<?php echo $width ?>" height="<?php echo $height ?>"<?php echo $preload . $controls . $autoplay . $loop ?>>
   <?php foreach($videos as $video): ?>
-  <source poster="<?php echo $thumb->url() ?>" src="<?php echo $video->url() ?>" type="<?php echo $video->mime() ?>" />
+  <source src="<?php echo $video->url() ?>" type="<?php echo $video->mime() ?>" />
   <?php endforeach ?>
 </video>
 <?php if(isset($thumb)): ?>
