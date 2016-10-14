@@ -2063,7 +2063,7 @@ return /******/ (function(modules) { // webpackBootstrap
             $(this).data('lightGallery').goToNextSlide();
           });
         });
-      }      
+      }
     }
   }
 
@@ -2163,8 +2163,9 @@ return /******/ (function(modules) { // webpackBootstrap
         $("body").attr('class','').addClass('template--leftcol');
 
         // Close button for column open
-        $('.fullscreen-bg,.close-button').on('click',function(){
-          window.history.back();
+        $('.fullscreen-bg').on('click',function(){
+          var home = $('.back-home').attr('href');
+          Barba.Pjax.goTo(home);
         });
 
         // Create gallery on project page
@@ -2192,8 +2193,9 @@ return /******/ (function(modules) { // webpackBootstrap
         $("body").attr('class','').addClass('template--rightcol');
 
         // Close button for column open
-        $('.fullscreen-bg,.close-button').on('click',function(){
-          window.history.back();
+        $('.fullscreen-bg').on('click',function(){
+          var home = $('.back-home').attr('href');
+          Barba.Pjax.goTo(home);
         });
       }
     });

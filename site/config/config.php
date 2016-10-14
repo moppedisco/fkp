@@ -16,6 +16,9 @@ for more information: http://getkirby.com/license
 */
 
 c::set('license', 'put your license key here');
+c::set('kirby.extension.videoext.video_tag', true);
+c::set('kirby.extension.videoext.snippet_name	', "videoext");
+
 
 /*
 
