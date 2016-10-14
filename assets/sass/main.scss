@@ -7,7 +7,7 @@
 }
 
 html {
-  @include font-size(14px,true);
+  @include font-size(13px,true);
 }
 
 html,
@@ -197,13 +197,19 @@ video {
   }
 }
 
-.content h1 {
-  @include font-size(16px);
-  text-transform: uppercase;
-  font-weight: 200;
-  letter-spacing: 1px;
-  text-align: center;
-  margin-bottom: 10px;
+.content {
+  h1 {
+    @include font-size(16px);
+    text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  figure {
+    margin-bottom: 10px;
+  }
 }
 
 .project-list__item {

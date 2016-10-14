@@ -1,9 +1,8 @@
-title: Other people magazine
+title: Magazine
 pages:
-  template:
-    - magazine
-    - rightcol
-files: false
+  template: project
+files:
+  sortable: true
 fields:
   title:
     label: Title

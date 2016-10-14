@@ -1,7 +1,8 @@
 title: Projects
 pages:
   template: project
-files: false
+files:
+  sortable: true
 fields:
   title:
     label: Title

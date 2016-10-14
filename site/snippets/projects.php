@@ -1,4 +1,5 @@
 <div class="project-list">
+  <?php echo $page->text()->kirbytext() ?>
   <?php foreach($page->children() as $project): ?>
     <div class="project-list__item">
       <?php if($project->images() && !$project->video()): ?>

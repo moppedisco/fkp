@@ -1,0 +1,5 @@
+Title: Edition 1
+
+----
+
+Text: some content for editon 1
