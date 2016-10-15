@@ -2,9 +2,23 @@
 
   var $window = $(window);
 
+  function reSizeVideoWrapper(){
+    if(window.breakpoint != 'mobile'){
+      adjustVideoPositioning('.fullscreen-bg','video');
+    } else {
+      adjustVideoPositioning('.fullscreen-bg','img');
+    }
+  }
+
   function init(){
 
     breakpoint();
+
+    reSizeVideoWrapper();
+
+    $(window).resize(function() {
+			reSizeVideoWrapper();
+		});
 
     if(window.breakpoint != 'mobile'){
       barbaInit();
@@ -42,6 +56,50 @@
 
     Barba.Dispatcher.on('linkClicked', function(el) {
       lastElementClicked = el;
+    });
+
+    Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus, container) {
+
+      // =================
+      // Create gallary if project or magazine page
+      if($('.project-list-images img').length){
+        var $lg = $(".project-list-images");
+        $lg.each(function(index){
+          $(this).lightGallery({
+            showThumbByDefault: false,
+            controls: false,
+            download: false,
+            mode: 'lg-fade'
+          });
+
+          $(this).on('onSlideClick.lg',function(event, index, fromTouch, fromThumb){
+            $(this).data('lightGallery').goToNextSlide();
+          });
+        });
+      }
+
+      // =================
+      // Apply pin on magazine pages
+      if($('.magazine-list-images').length){
+        var controller = new ScrollMagic.Controller({container: ".barba-container"});
+
+        $('.project-list__item').each(function(){
+          var _this = this,
+              containerHeight = $(this).innerHeight(),
+              elementHeight = $(this).parents('.project-list__item').innerHeight(),
+              pinnedText = $(this).find('.project-list-intro')[0];
+
+          var currentScene = new ScrollMagic.Scene({
+            triggerElement: pinnedText,
+            triggerHook: 0,
+            // duration: containerHeight - 85
+            duration: 0
+          })
+            .setPin(pinnedText)
+            .setClassToggle(_this, 'pinned')
+            .addTo(controller);
+        });
+      }
     });
 
     var columnTransition = Barba.BaseTransition.extend({
@@ -83,7 +141,7 @@
 
         openColumnAnimation
           .to('.fullscreen-bg', 1, {opacity:'0.3',ease: Power4.easeInOut},'open')
-          .to($(this.newContainer), 1, {x:'0',ease: Power4.easeInOut},'open');
+          .to($(this.newContainer), 1, {x:'0',clearProps:"all",ease: Power4.easeInOut},'open');
 
       },
 
@@ -104,7 +162,7 @@
 
         closeColumnAnimation
           .to('.fullscreen-bg', 1, {opacity:'1',ease: Power4.easeInOut},'close')
-          .to($(this.oldContainer), 1, {x:hideColumnValue,ease: Power4.easeInOut},'close');
+          .to($(this.oldContainer), 1, {x:hideColumnValue,clearProps:"all",ease: Power4.easeInOut},'close');
 
       },
 
@@ -137,23 +195,6 @@
           var home = $('.back-home').attr('href');
           Barba.Pjax.goTo(home);
         });
-
-        // Create gallery on project page
-        if($('.project-list-images img')){
-          var $lg = $(".project-list-images");
-          $lg.each(function(index){
-            $(this).lightGallery({
-              showThumbByDefault: false,
-              controls: false,
-              download: false,
-              mode: 'lg-fade'
-            });
-
-            $(this).on('onSlideClick.lg',function(event, index, fromTouch, fromThumb){
-              $(this).data('lightGallery').goToNextSlide();
-            });
-          });
-        }
       }
     });
 
@@ -174,7 +215,7 @@
       namespace: 'home',
       onEnterCompleted: function() {
         $("body").attr('class','').addClass('template--home');
-        $('.fullscreen-bg,.close-button').unbind( "click" );
+        $('.fullscreen-bg').unbind( "click" );
       }
     });
 
@@ -185,6 +226,40 @@
     Barba.Prefetch.init();
     Barba.Pjax.init();
   }
+
+  function adjustVideoPositioning(element,type) {
+		var windowW = $(window).width();
+		var windowH = $(window).height();
+		var mediaAspect = 16/9;
+		var windowAspect = windowW/windowH;
+		if (windowAspect < mediaAspect) {
+			// taller
+			$(element).find(type)
+				.width(windowH*mediaAspect)
+				.height(windowH);
+			$(element)
+				.css('top',0)
+				.css('left',-(windowH*mediaAspect-windowW)/2)
+				.css('height',windowH);
+			$(element+'_html5_api').css('width',windowH*mediaAspect);
+			$(element+'_flash_api')
+				.css('width',windowH*mediaAspect)
+				.css('height',windowH);
+		} else {
+			// wider
+			$(element).find(type)
+				.width(windowW)
+				.height(windowW/mediaAspect);
+			$(element)
+				.css('top',-(windowW/mediaAspect-windowH)/2)
+				.css('left',0)
+				.css('height',windowW/mediaAspect);
+			$(element+'_html5_api').css('width','100%');
+			$(element+'_flash_api')
+				.css('width',windowW)
+				.css('height',windowW/mediaAspect);
+		}
+	}
 
   function breakpoint() {
     var breakpoint;

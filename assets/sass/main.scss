@@ -2,6 +2,10 @@
 @import '_fonts.scss';
 @import '_helpers.scss';
 
+// =============================================================================
+// =============================================================================
+// GENERAL
+
 * {
   box-sizing: border-box;
 }
@@ -33,9 +37,85 @@ video {
   height: auto;
 }
 
+// =============================================================================
+// =============================================================================
+// MAIN LAYOUTS
+
 .main {
   z-index: 10;
 }
+
+.barba-container {
+  background: #fff;
+  max-width: 400px;
+  padding: 40px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: scroll;
+
+  @media (max-width: 767px) {
+    max-width: none;
+  }
+
+  &[data-namespace="home"] {
+    transform: translateX(-100%);
+  }
+
+  @media (max-width: 767px) {
+    position: static;
+    height: auto;
+    width: auto;
+    padding: 20px;
+  }
+}
+// ==================================
+// ==================================
+// LEFT COL
+.template--leftcol {
+  .barba-container {
+    right: auto;
+    left: 0;
+  }
+
+  // =================
+  // WHEN COLUMN OPEN
+  .fullscreen-bg {
+    cursor: w-resize;
+    opacity: 0.3;
+
+    @media (max-width: 767px) {
+      opacity: 1;
+    }
+  }
+}
+
+// ==================================
+// ==================================
+// RIGHT COL
+.template--rightcol {
+  .barba-container {
+    right: 0;
+    left: auto;
+  }
+
+  // =================
+  // WHEN COLUMN OPEN
+  .fullscreen-bg {
+    cursor: e-resize;
+    opacity: 0.3;
+
+    @media (max-width: 767px) {
+      opacity: 1;
+    }
+  }
+}
+
+// =============================================================================
+// =============================================================================
+// NAVIGATION
 
 .main-nav {
   float: left;
@@ -79,6 +159,7 @@ video {
       display: block;
     }
   }
+
   &.active ul { display: block; }
 
   > a {
@@ -92,110 +173,9 @@ video {
   }
 }
 
-.close-button {
-  display: none;
-  position: absolute;
-  top: 0;
-  background: none;
-  border: none;
-  @include font-size(8px);
-  transition: all 0.3s;
-  opacity: 0;
-  z-index: -1;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-
-  &:hover {
-    transition: all 0.1s;
-    opacity: 0.3 !important;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
-
-.template--leftcol {
-  .barba-container {
-    right: auto;
-    left: 0;
-  }
-
-  .close-button {
-    left: 370px;
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-.template--rightcol {
-  .barba-container {
-    right: 0;
-    left: auto;
-  }
-
-  .close-button {
-    right: 370px;
-    opacity: 1;
-    z-index: 1;
-  }
-}
-
-
-.fullscreen-bg {
-  background: #fff;
-
-  .template--rightcol & {
-    cursor: e-resize;
-    opacity: 0.3;
-
-    @media (max-width: 767px) {
-      opacity: 1;
-    }
-  }
-
-  .template--leftcol & {
-    cursor: w-resize;
-    opacity: 0.3;
-
-    @media (max-width: 767px) {
-      opacity: 1;
-    }
-  }
-
-}
-
-.barba-container {
-  background: #fff;
-  max-width: 400px;
-  padding: 40px;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: scroll;
-
-  @media (max-width: 767px) {
-    max-width: none;
-  }
-
-  &[data-namespace="home"] {
-    transform: translateX(-100%);
-  }
-
-  @media (max-width: 767px) {
-    position: static;
-    height: auto;
-    width: auto;
-    padding: 20px;
-  }
-}
+// =============================================================================
+// =============================================================================
+// CONTENT STYLING
 
 .content {
   h1 {
@@ -222,13 +202,39 @@ video {
   }
 }
 
+.project-list-intro {
+  background: rgba(255,255,255,1);
+  width: 100%;
+  // position: absolute;
+  padding: 10px;
+
+  .pinned & {
+    background: rgba(255,255,255,0.8);
+  }
+
+  *:last-child { margin: 0; }
+}
+
 .project-list-image {
   display: none;
+  margin-bottom: 15px;
+
+  .magazine-list-images &{
+    display: block;
+  }
 
   &:first-child {
     display: block;
   }
+
+  img {
+    display: block;
+  }
 }
+
+// =============================================================================
+// =============================================================================
+// LIGHTBOX STYLES
 
 .lg-img-wrap {
   img.lg-object.lg-image  {

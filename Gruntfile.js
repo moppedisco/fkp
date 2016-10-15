@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['assets/js/vendor/jquery-1.11.3.min.js','assets/js/vendor/lightgallery.js','assets/js/vendor/lightgallery-video.js','assets/js/vendor/TweenMax.min.js','assets/js/vendor/barba.js','assets/js/main.js'],
+        src: ['assets/js/vendor/jquery-1.11.3.min.js','assets/js/vendor/ScrollMagic.min.js','assets/js/vendor/lightgallery.js','assets/js/vendor/lightgallery-video.js','assets/js/vendor/TweenMax.min.js','assets/js/vendor/barba.js','assets/js/main.js'],
         dest: 'assets/build/index.js',
       },
     },

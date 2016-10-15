@@ -60,51 +60,17 @@ pre,hr {
   z-index: -100;
 
   video {
-     position: absolute;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
+    max-width: none;
+     @media (max-width: 767px) {
+       display: none;
+     }
    }
 
   img {
-    display: none;  }
-
-}
-
-@media (min-aspect-ratio: 16/9) {
-  .fullscreen-bg video {
-    height: 300%;
-    top: -100%;
-  }
-}
-
-@media (max-aspect-ratio: 16/9) {
-  .fullscreen-bg video {
-    width: 300%;
-    left: -100%;
-  }
-}
-
-@media (max-width: 767px) {
-  .fullscreen-bg video {
     display: none;
+    @media (max-width: 767px) {
+      display: block;
+      max-width: none;
+    }
   }
-
-  .fullscreen-bg img {
-    display: block;
-    /* Set rules to fill background */
-    min-height: 100%;
-    min-width: 1024px;
-
-    /* Set up proportionate scaling */
-    width: 100%;
-    height: auto;
-
-    /* Set up positioning */
-    position: fixed;
-    top: 0;
-    left: -50%;
-  }
-
 }
