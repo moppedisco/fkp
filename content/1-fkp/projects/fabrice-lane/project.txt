@@ -3,3 +3,16 @@ Title: Fabrice Lane
 ----
 
 Text: 
+
+----
+
+Pictures: 
+
+- fl_01.jpg
+- fl_02.jpg
+- fl_03.jpg
+- fl_04.jpg
+- fl_05.jpg
+- fl_tg1.jpg
+- fl_tg2.jpg
+- fl_tg3.jpg

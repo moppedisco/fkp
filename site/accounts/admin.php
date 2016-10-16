@@ -10,6 +10,6 @@ history:
   - >
     other-people-magazine/magazine/other-people-magazine-2
   - other-people-magazine/magazine/other-people-magazine-1
+  - fkp/projects/fabrice-lane
   - other-people-magazine/magazine
   - other-people-magazine
-  - other-people-magazine/opmfilm

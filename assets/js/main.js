@@ -33,14 +33,14 @@
     } else {
       // =================
       // Create gallary if project or magazine page
-      if($('.project-list-images img').length){
+      if($('.gallery-list').length){
         imageGallery();
       }
     }
   }
 
   function imageGallery(){
-    var $lg = $(".project-list-images");
+    var $lg = $(".gallery-list-images");
     $lg.each(function(index){
       $(this).lightGallery({
         showThumbByDefault: false,
@@ -65,20 +65,20 @@
     Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus, container) {
       // =================
       // Create gallary if project or magazine page
-      if($('.project-list-images img').length){
+      if($('.gallery-list').length){
         imageGallery();
       }
 
       // =================
       // Apply pin on magazine pages
-      if($('.magazine-list-images').length){
+      if($('.magazine-list').length){
         var controller = new ScrollMagic.Controller({container: ".barba-container"});
 
-        $('.project-list__item').each(function(){
+        $('.gallery-list').each(function(){
           var _this = this,
               containerHeight = $(this).innerHeight(),
-              elementHeight = $(this).parents('.project-list__item').innerHeight(),
-              pinnedText = $(this).find('.project-list-intro')[0];
+              // elementHeight = $(this).parents('.project-list__item').innerHeight(),
+              pinnedText = $(this).find('.gallery-list-intro')[0];
 
           var currentScene = new ScrollMagic.Scene({
             triggerElement: pinnedText,
