@@ -41,6 +41,14 @@ video {
 // =============================================================================
 // MAIN LAYOUTS
 
+.header {
+  @include clearfix;
+
+  @media (max-width: 767px) {
+    min-height: 40vh;
+  }
+}
+
 .main {
   z-index: 10;
 }
@@ -61,7 +69,7 @@ video {
   }
 
   &[data-namespace="home"] {
-    transform: translateX(-100%);
+    transform: translateX(-200%);
   }
 
   @media (max-width: 767px) {
@@ -155,9 +163,6 @@ video {
 
   ul {
     display: none;
-    @media (max-width: 767px) {
-      display: block;
-    }
   }
 
   &.active ul { display: block; }

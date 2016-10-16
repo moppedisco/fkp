@@ -4831,35 +4831,39 @@ return /******/ (function(modules) { // webpackBootstrap
 			reSizeVideoWrapper();
 		});
 
+    $('.main-nav a.back-home').on('click',function(e){
+      var $siblingMenu = $(this).parent().siblings();
+      if($siblingMenu.hasClass('active')) { $siblingMenu.removeClass('active') };
+      $(this).parent().toggleClass('active');
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
     if(window.breakpoint != 'mobile'){
       barbaInit();
-
-      $('.main-nav a.back-home').on('click',function(e){
-        var $siblingMenu = $(this).parent().siblings();
-        if($siblingMenu.hasClass('active')) { $siblingMenu.removeClass('active') };
-        // ($('.main-nav').hasClass('') ? $('.right-nav') : $('.left-nav'));
-        $(this).parent().toggleClass('active');
-        e.preventDefault();
-        e.stopPropagation();
-      });
     } else {
-      // Create gallery on project page
-      if($('.project-list-images img')){
-        var $lg = $(".project-list-images");
-        $lg.each(function(index){
-          $(this).lightGallery({
-            showThumbByDefault: false,
-            controls: false,
-            download: false,
-            mode: 'lg-fade'
-          });
-
-          $(this).on('onSlideClick.lg',function(event, index, fromTouch, fromThumb){
-            $(this).data('lightGallery').goToNextSlide();
-          });
-        });
+      // =================
+      // Create gallary if project or magazine page
+      if($('.project-list-images img').length){
+        imageGallery();
       }
     }
+  }
+
+  function imageGallery(){
+    var $lg = $(".project-list-images");
+    $lg.each(function(index){
+      $(this).lightGallery({
+        showThumbByDefault: false,
+        controls: false,
+        download: false,
+        mode: 'lg-fade'
+      });
+
+      $(this).on('onSlideClick.lg',function(event, index, fromTouch, fromThumb){
+        $(this).data('lightGallery').goToNextSlide();
+      });
+    });
   }
 
   function barbaInit(){
@@ -4870,23 +4874,10 @@ return /******/ (function(modules) { // webpackBootstrap
     });
 
     Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus, container) {
-
       // =================
       // Create gallary if project or magazine page
       if($('.project-list-images img').length){
-        var $lg = $(".project-list-images");
-        $lg.each(function(index){
-          $(this).lightGallery({
-            showThumbByDefault: false,
-            controls: false,
-            download: false,
-            mode: 'lg-fade'
-          });
-
-          $(this).on('onSlideClick.lg',function(event, index, fromTouch, fromThumb){
-            $(this).data('lightGallery').goToNextSlide();
-          });
-        });
+        imageGallery();
       }
 
       // =================

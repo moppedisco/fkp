@@ -3,12 +3,12 @@
 
     // fetch all video formats we need
     $videos = array(
-      $site->videos()->find('my-movie.mp4')
+      $site->videos()->first()
     );
 
     snippet('video', array(
       'videos' => $videos,
-      'thumb'  => $site->images()->find('my-movie.jpg'),
+      'thumb'  => $site->images()->first(),
       'controls' => false,
       'autoplay' => true,
       'loop' => true
