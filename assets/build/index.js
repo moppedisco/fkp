@@ -4826,7 +4826,38 @@ return /******/ (function(modules) { // webpackBootstrap
     }
   }
 
+  function setFirstVisit(){
+    if (typeof localStorage === 'object') {
+      try {
+        sessionStorage.setItem('firstvisit', true);
+      } catch (e) {
+        console.log("your browser doesn't support localStorage in privatemode");
+      }
+    }
+  }
+
+  function introLoading(){
+
+    window.onload = function(e) {
+      TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut,onComplete:function(){
+        setFirstVisit();
+      }});
+    };
+
+  }
+
   function init(){
+
+    if(!sessionStorage.getItem('firstvisit')){
+      console.log('first visit');
+      introLoading();
+    } else {
+      $('.template--home .fullscreen-bg').css({
+        opacity: 1,
+        transform: "scale(1)"
+      })
+      console.log('not first time');
+    }
 
     breakpoint();
 
