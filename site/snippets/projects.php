@@ -12,6 +12,7 @@
        <?php endforeach ?>
       </ul>
       <b><?php echo $project->title()->html() ?></b>
+      <p><?php echo $project->text()->html() ?></p>
     </div>
   <?php endforeach ?>
 </div>
