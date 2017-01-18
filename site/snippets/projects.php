@@ -12,7 +12,7 @@
        <?php endforeach ?>
       </ul>
       <b><?php echo $project->title()->html() ?></b>
-      <p><?php echo $project->text()->html() ?></p>
+      <p><?php echo $project->text()->kirbytext() ?></p>
     </div>
   <?php endforeach ?>
 </div>
