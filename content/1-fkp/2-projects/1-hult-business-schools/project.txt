@@ -1,0 +1,73 @@
+Title: Hult Business Schools - Brand Identity
+
+----
+
+Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt euismod nisi, eu lobortis orci rutrum sed. Aliquam tempus sodales risus non pharetra. Etiam vestibulum rutrum ultricies. Etiam in sapien at augue facilisis consequat dapibus non tortor. Nulla facilisi. Donec ut pulvinar mi, eget auctor justo. Donec elementum sed quam ut interdum. Sed sit amet fermentum nisl.
+
+----
+
+Pictures: 
+
+- hult_logo_03.gif
+- 01_img_9954.jpg
+- 02img_9987.jpg
+- 03_img_9988.jpg
+- 04_img_9992.jpg
+- 05_img_9981.jpg
+- 06_img_9982.jpg
+- 07_img_9986.jpg
+- 08_img_9995.jpg
+- 09_img_9979.jpg
+- 10_img_9967.jpg
+- 11_img_9999.jpg
+- 12_img_9996.jpg
+- hult_signage_01.jpg
+- hult_signage_02.jpg
+
+----
+
+Image: hult_logo_03.gif
+
+----
+
+Cover: hult_logo_03.gif
+
+----
+
+Screenshots: 
+
+- 
+  image: 01_img_9954.jpg
+  description: screen shot 1
+  size: span-10
+  vertical: middle
+  offset: push-1
+  pushleft: push-1
+- 
+  image: 02img_9987.jpg
+  description: number 2
+  size: span-12
+  vertical: top
+  offset: push-1
+  pushleft: push-1
+- 
+  image: 05_img_9981.jpg
+  description: number 3
+  size: span-17
+  vertical: middle
+  offset: push-10
+  pushleft: push-5
+- 
+  image: 04_img_9992.jpg
+  description: image 4
+  size: span-13
+  vertical: top
+  offset: push-2
+  pushleft: push-3
+- 
+  image: 10_img_9967.jpg
+  description: hello
+  size: span-8
+  offset: push-2
+  vertical: middle
+  pushleft: push-1

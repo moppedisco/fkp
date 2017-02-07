@@ -7,8 +7,8 @@ email: yacbel@gmail.com
 language: en
 role: admin
 history:
+  - fkp/projects/hult-business-schools
   - fkp/projects/hult-brand-identity
   - other-people-magazine/opmfilm
   - fkp/projects
   - other-people-magazine/magazine/other-people-magazine-1
-  - other-people-magazine/magazine

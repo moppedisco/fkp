@@ -33,14 +33,14 @@
   function init(){
 
     if(!sessionStorage.getItem('firstvisit')){
-      console.log('first visit');
+      // console.log('first visit');
       introLoading();
     } else {
       $('.template--home .fullscreen-bg').css({
         opacity: 1,
         transform: "scale(1)"
       })
-      console.log('not first time');
+      // console.log('not first time');
     }
 
     breakpoint();
@@ -91,6 +91,7 @@
 
     Barba.Dispatcher.on('linkClicked', function(el) {
       lastElementClicked = el;
+      console.log(el);
     });
 
     Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus, container) {
@@ -129,16 +130,17 @@
         var open = (this.oldContainer.dataset.namespace == "home" ? true : false);
 
         if(open){
+          console.log("open");
           Promise
             .all([this.newContainerLoading])
             .then(this.openBox.bind(this));
         } else {
+          console.log("close");
           Promise
             .all([this.newContainerLoading])
             .then(this.closeBox.bind(this));
         }
       },
-
       openBox: function() {
         var _this = this;
         var $el = $(this.newContainer);
@@ -199,12 +201,71 @@
       }
     });
 
+    var projectTransition = Barba.BaseTransition.extend({
+      start: function() {
+        var open = ($(lastElementClicked).attr('data-barba-link-type') == "projects" ? true : false);
+        // console.log($(lastElementClicked).attr('data-barba-link-type'));
+
+        if(open){
+          console.log("open");
+          Promise
+            .all([this.newContainerLoading])
+            .then(this.openBox.bind(this));
+        } else {
+          console.log("close");
+          Promise
+            .all([this.newContainerLoading])
+            .then(this.closeBox.bind(this));
+        }
+      },
+      openBox: function() {
+        var _this = this;
+        var growColumnAnimation = new TimelineMax({onComplete: function(){
+          return _this.done();
+        }});
+
+        growColumnAnimation
+          .to($(this.oldContainer), 0.8, {width:"80%",ease: Power4.easeOut},'first')
+          .to($(this.oldContainer).find('.content'), 0.2, {opacity:0,ease: Power4.easeOut},'first')
+          .to($(this.newContainer), 0.2, {x:0,width:"80%",ease: Power4.easeOut});
+
+      },
+      closeBox: function() {
+        var _this = this;
+        var closeColumnAnimation = new TimelineMax({onComplete: function(){
+          return _this.done();
+        }});
+
+        $('.right-nav').css({
+          zIndex : ''
+        });
+
+        closeColumnAnimation
+          .to('.fullscreen-bg', 1, {opacity:'1',ease: Power4.easeInOut},'close')
+          .to($(this.oldContainer), 1, {x:"-100%",ease: Power4.easeInOut},'close');
+
+      },
+
+      valid: function() {
+        var prev = Barba.HistoryManager.prevStatus();
+
+        if(prev.namespace === 'projects' || prev.namespace === 'project'){
+          return true
+        } else {
+          return false
+        }
+      }
+    });
+
     Barba.Pjax.getTransition = function() {
 
       if (columnTransition.valid()) {
         return columnTransition;
+      } else if(projectTransition.valid()) {
+        return projectTransition;
+      } else {
+        console.log('broken');
       }
-
     };
 
     var Leftcol = Barba.BaseView.extend({
@@ -215,6 +276,7 @@
         // Close button for column open
         $('.fullscreen-bg').on('click',function(){
           var home = $('.back-home').attr('href');
+          lastElementClicked = $('.fullscreen-bg');
           Barba.Pjax.goTo(home);
         });
       }
@@ -228,6 +290,36 @@
         // Close button for column open
         $('.fullscreen-bg').on('click',function(){
           var home = $('.back-home').attr('href');
+          lastElementClicked = $('.fullscreen-bg');
+          Barba.Pjax.goTo(home);
+        });
+      }
+    });
+
+
+    var Projectscol = Barba.BaseView.extend({
+      namespace: 'projects',
+      onEnterCompleted: function() {
+        $("body").attr('class','').addClass('template--projects');
+
+        // Close button for column open
+        $('.fullscreen-bg').on('click',function(){
+          var home = $('.back-home').attr('href');
+          lastElementClicked = $('.fullscreen-bg');
+          Barba.Pjax.goTo(home);
+        });
+      }
+    });
+
+    var Projectcol = Barba.BaseView.extend({
+      namespace: 'project',
+      onEnterCompleted: function() {
+        $("body").attr('class','').addClass('template--project');
+
+        // Close button for column open
+        $('.fullscreen-bg').unbind( "click" ).on('click',function(){
+          var home = $('.back-home').attr('href');
+          lastElementClicked = $('.fullscreen-bg');
           Barba.Pjax.goTo(home);
         });
       }
@@ -244,7 +336,10 @@
     // Don't forget to init the view!
     Leftcol.init();
     Rightcol.init();
+    Projectscol.init();
+    Projectcol.init();
     Home.init();
+
     Barba.Prefetch.init();
     Barba.Pjax.init();
   }

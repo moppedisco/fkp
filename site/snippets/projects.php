@@ -1,18 +1,14 @@
 <div class="project-list">
   <?php echo $page->text()->kirbytext() ?>
   <?php foreach($page->children() as $project): ?>
-
-    <div class="gallery-list">
-      <ul class='gallery-list-images'>
-       <?php foreach($project->pictures()->yaml() as $image): ?>
-         <?php $img = $project->image($image); ?>
-        <li class='gallery-list__image' data-src="<?php echo ($img->gallerylink() == '' ? $img->url() : $img->gallerylink()) ?>">
+    <?php $img = $project->images()->find($project->cover()); ?>
+    <div class='project-list__item'>
+      <a data-barba-link-type='projects' href="<?php echo $project->url() ?>">
+        <?php if($img): ?>
           <img src="<?php echo $img ? $img->url() : '' ?>" alt="<?php echo $project->title()->html() ?>" />
-        </li>
-       <?php endforeach ?>
-      </ul>
-      <b><?php echo $project->title()->html() ?></b>
-      <p><?php echo $project->text()->kirbytext() ?></p>
+        <?php endif ?>
+        <b><?php echo $project->title()->html() ?></b>
+      </a>
     </div>
   <?php endforeach ?>
 </div>

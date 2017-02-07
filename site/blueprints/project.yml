@@ -2,10 +2,6 @@ title: Project
 pages: false
 files:
   sortable: true
-  fields:
-    gallerylink:
-      label: Gallery link
-      type:  text
 fields:
   title:
     label: Title
@@ -13,6 +9,82 @@ fields:
   text:
     label: Text
     type:  textarea
-  pictures:
-    label: Gallery
-    type: gallery
+  cover:
+    label: Cover
+    type: image
+  screenshots:
+    label: Screenshots
+    type: structure
+    style: table
+    modalsize: small
+    fields:
+      image:
+        label: Image
+        type: image
+      description:
+        label: Description
+        type: text
+      pushLeft:
+        label: Offset (from left)
+        type: select
+        options:
+          push-1: 1/24
+          push-2: 2/24
+          push-3: 3/24
+          push-4: 4/24
+          push-5: 5/24
+          push-6: 6/24
+          push-7: 7/24
+          push-8: 8/24
+          push-9: 9/24
+          push-10: 10/24
+          push-11: 11/24
+          push-12: 12/24
+          push-13: 13/24
+          push-14: 14/24
+          push-15: 15/24
+          push-16: 16/24
+          push-17: 17/24
+          push-18: 18/24
+          push-19: 19/24
+          push-20: 20/24
+          push-21: 21/24
+          push-22: 22/24
+          push-23: 23/24
+          push-24: 24/24
+      size:
+        label: Size
+        type: select
+        options:
+          span-1: 1/24
+          span-2: 2/24
+          span-3: 3/24
+          span-4: 4/24
+          span-5: 5/24
+          span-6: 6/24
+          span-7: 7/24
+          span-8: 8/24
+          span-9: 9/24
+          span-10: 10/24
+          span-11: 11/24
+          span-12: 12/24
+          span-13: 13/24
+          span-14: 14/24
+          span-15: 15/24
+          span-16: 16/24
+          span-17: 17/24
+          span-18: 18/24
+          span-19: 19/24
+          span-20: 20/24
+          span-21: 21/24
+          span-22: 22/24
+          span-23: 23/24
+          span-24: 24/24
+      vertical:
+        label: Vertical Placement
+        type: select
+        default: middle
+        options:
+          top: Top
+          middle: Middle
+          bottom: Bottom
