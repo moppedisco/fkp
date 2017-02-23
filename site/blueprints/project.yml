@@ -2,6 +2,10 @@ title: Project
 pages: false
 files:
   sortable: true
+  fields:
+    gallerylink:
+      label: Gallery link
+      type:  text  
 fields:
   title:
     label: Title

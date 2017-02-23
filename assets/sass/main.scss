@@ -23,7 +23,7 @@ body {
 }
 
 body {
-  background: #fff;
+  background: #eef1f5;
   font-family: 'Consolas';
 }
 
@@ -54,7 +54,7 @@ video {
 }
 
 .barba-container {
-  background: #fff;
+  background: #eef1f5;
   padding: 40px;
   width: 500px;
   height: 100%;
@@ -80,7 +80,7 @@ video {
 }
 
 .intro-overlay {
- background: #fff;
+ background: #eef1f5;
  position: absolute;
  top: 0;
  left: 0;
@@ -128,6 +128,21 @@ video {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  .video {
+    position: relative;
+  	padding-bottom: 56.25%; /* 16:9 */
+  	padding-top: 25px;
+  	height: 0;
+
+    iframe {
+      position: absolute;
+    	top: 0;
+    	left: 0;
+    	width: 100%;
+    	height: 100%;
+    }
+  }
 
   li {
     margin-bottom: 2.5%;
@@ -370,7 +385,7 @@ video {
 
 .project-list__item {
   margin-bottom: 30px;
-  
+
   a {
     text-transform: uppercase;
     color: #000;
@@ -407,4 +422,37 @@ video {
 
 .lg-backdrop {
   background: rgba(255,255,255,0.5);
+}
+
+.fullscreen-bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100;
+
+
+
+  video {
+    position: relative;
+    z-index: 1;
+    max-width: none;
+     @media (max-width: 767px) {
+       display: none;
+     }
+   }
+
+  img {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    // display: none;
+    @media (max-width: 767px) {
+      display: block;
+      max-width: none;
+    }
+  }
 }

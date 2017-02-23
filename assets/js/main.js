@@ -5,6 +5,7 @@
   function reSizeVideoWrapper(){
     if(window.breakpoint != 'mobile'){
       adjustVideoPositioning('.fullscreen-bg','video');
+      adjustVideoPositioning('.fullscreen-bg','img');
     } else {
       adjustVideoPositioning('.fullscreen-bg','img');
     }
@@ -23,24 +24,23 @@
   function introLoading(){
 
     window.onload = function(e) {
-      TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut,onComplete:function(){
-        setFirstVisit();
-      }});
+      TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut});
+      TweenMax.to('.fullscreen-bg img', 1.4, {opacity:'0',ease: Expo.easeOut});
     };
 
   }
 
   function init(){
 
-    if(!sessionStorage.getItem('firstvisit')){
-      // console.log('first visit');
+    if($('body').hasClass('template--home')){
+      console.log('first visit');
       introLoading();
     } else {
       $('.template--home .fullscreen-bg').css({
         opacity: 1,
         transform: "scale(1)"
       })
-      // console.log('not first time');
+      console.log('not first time');
     }
 
     breakpoint();
@@ -88,18 +88,28 @@
 
   function barbaInit(){
     var lastElementClicked;
+    var clicked = false;
 
     Barba.Dispatcher.on('linkClicked', function(el) {
       lastElementClicked = el;
-      console.log(el);
+      clicked = true;
+    });
+
+    Barba.Dispatcher.on('initStateChange', function(currentStatus) {
+      if(!clicked) {
+        console.log('back');
+      }
     });
 
     Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus, container) {
+      clicked = false;
       // =================
       // Create gallary if project or magazine page
       if($('.gallery-list').length){
         imageGallery();
       }
+
+      // currentNamespace = currentStatus.namespace;
 
       // =================
       // Apply pin on magazine pages
@@ -204,13 +214,19 @@
     var projectTransition = Barba.BaseTransition.extend({
       start: function() {
         var open = ($(lastElementClicked).attr('data-barba-link-type') == "projects" ? true : false);
-        // console.log($(lastElementClicked).attr('data-barba-link-type'));
+        var current = Barba.HistoryManager.history.length;
 
         if(open){
           console.log("open");
-          Promise
-            .all([this.newContainerLoading])
-            .then(this.openBox.bind(this));
+          if(clicked){
+            Promise
+              .all([this.newContainerLoading])
+              .then(this.openBox.bind(this));
+          } else {
+            Promise
+              .all([this.newContainerLoading])
+              .then(this.goBackToProjects.bind(this));
+          }
         } else {
           console.log("close");
           Promise
@@ -245,6 +261,17 @@
           .to($(this.oldContainer), 1, {x:"-100%",ease: Power4.easeInOut},'close');
 
       },
+      goBackToProjects: function() {
+        var _this = this;
+        var closeColumnAnimation = new TimelineMax({onComplete: function(){
+          return _this.done();
+        }});
+
+        closeColumnAnimation
+          .to($(this.oldContainer), 0.8, {width:"500px",ease: Power4.easeOut},'first')
+          .to($(this.oldContainer).find('.content'), 0.2, {opacity:0,ease: Power4.easeOut},'first');
+
+      },
 
       valid: function() {
         var prev = Barba.HistoryManager.prevStatus();
@@ -277,6 +304,7 @@
         $('.fullscreen-bg').on('click',function(){
           var home = $('.back-home').attr('href');
           lastElementClicked = $('.fullscreen-bg');
+          Barba.Dispatcher.trigger('linkClicked', $('.fullscreen-bg'));
           Barba.Pjax.goTo(home);
         });
       }
@@ -291,11 +319,11 @@
         $('.fullscreen-bg').on('click',function(){
           var home = $('.back-home').attr('href');
           lastElementClicked = $('.fullscreen-bg');
+          Barba.Dispatcher.trigger('linkClicked', $('.fullscreen-bg'));
           Barba.Pjax.goTo(home);
         });
       }
     });
-
 
     var Projectscol = Barba.BaseView.extend({
       namespace: 'projects',
@@ -306,6 +334,7 @@
         $('.fullscreen-bg').on('click',function(){
           var home = $('.back-home').attr('href');
           lastElementClicked = $('.fullscreen-bg');
+          Barba.Dispatcher.trigger('linkClicked', $('.fullscreen-bg'));
           Barba.Pjax.goTo(home);
         });
       }
@@ -320,6 +349,7 @@
         $('.fullscreen-bg').unbind( "click" ).on('click',function(){
           var home = $('.back-home').attr('href');
           lastElementClicked = $('.fullscreen-bg');
+          Barba.Dispatcher.trigger('linkClicked', $('.fullscreen-bg'));
           Barba.Pjax.goTo(home);
         });
       }
