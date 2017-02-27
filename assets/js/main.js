@@ -24,8 +24,12 @@
   function introLoading(){
 
     window.onload = function(e) {
-      TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut});
-      TweenMax.to('.fullscreen-bg img', 1.4, {opacity:'0',ease: Expo.easeOut});
+      if(window.breakpoint != 'mobile'){
+        TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut});
+        TweenMax.to('.fullscreen-bg img', 1.4, {opacity:'0',ease: Expo.easeOut});
+      } else {
+        TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut});
+      }
     };
 
   }
@@ -229,6 +233,7 @@
           }
         } else {
           console.log("close");
+          console.log("rumpa 0");
           Promise
             .all([this.newContainerLoading])
             .then(this.closeBox.bind(this));
@@ -255,6 +260,8 @@
         $('.right-nav').css({
           zIndex : ''
         });
+
+        console.log("rumpa");
 
         closeColumnAnimation
           .to('.fullscreen-bg', 1, {opacity:'1',ease: Power4.easeInOut},'close')
@@ -331,7 +338,7 @@
         $("body").attr('class','').addClass('template--projects');
 
         // Close button for column open
-        $('.fullscreen-bg').on('click',function(){
+        $('.fullscreen-bg').unbind('click').on('click',function(){
           var home = $('.back-home').attr('href');
           lastElementClicked = $('.fullscreen-bg');
           Barba.Dispatcher.trigger('linkClicked', $('.fullscreen-bg'));

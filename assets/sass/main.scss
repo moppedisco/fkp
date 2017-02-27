@@ -1,6 +1,7 @@
-@import '_lightgallery.scss';
-@import '_fonts.scss';
-@import '_helpers.scss';
+@import '_lightgallery';
+// @import '_fonts.scss';
+@import '_fonts';
+@import '_helpers';
 
 // =============================================================================
 // =============================================================================
@@ -11,7 +12,7 @@
 }
 
 html {
-  @include font-size(13px,true);
+  @include font-size(11px,true);
 }
 
 html,
@@ -23,8 +24,11 @@ body {
 }
 
 body {
-  background: #eef1f5;
-  font-family: 'Consolas';
+  background: #fff;
+  // font-family: 'Consolas';
+  font-family: 'Frutiger Cn';
+  font-family: 'Frutiger Roman';
+  font-family: 'Frutiger Light';
 }
 
 figure {
@@ -54,7 +58,7 @@ video {
 }
 
 .barba-container {
-  background: #eef1f5;
+  background: #fff;
   padding: 40px;
   width: 500px;
   height: 100%;
@@ -80,7 +84,7 @@ video {
 }
 
 .intro-overlay {
- background: #eef1f5;
+ background: #fff;
  position: absolute;
  top: 0;
  left: 0;
@@ -128,6 +132,10 @@ video {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  @media (max-width: 767px) {
+    padding-top: 20px;
+  }
 
   .video {
     position: relative;

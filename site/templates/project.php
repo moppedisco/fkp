@@ -4,7 +4,7 @@
   <div class="barba-container" data-namespace="project">
     <div class="content">
       <h1><?php echo $page->title()->html() ?></h1>
-      <p> <?php echo $page->text()->html() ?></p>
+      <p> <?php echo $page->text()->kirbytext() ?></p>
       <ul class='mosaic-layout'>
         <?php foreach($page->screenshots()->toStructure() as $screenshot): ?>
           <?php $img = $screenshot->images()->find($screenshot->image()); ?>
