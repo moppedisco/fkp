@@ -25,10 +25,10 @@
 
     window.onload = function(e) {
       if(window.breakpoint != 'mobile'){
-        TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut});
-        TweenMax.to('.fullscreen-bg img', 1.4, {opacity:'0',ease: Expo.easeOut});
+        TweenMax.to('.fullscreen-bg video', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut});
+        // TweenMax.to('.fullscreen-bg img', 1.4, {opacity:'0',ease: Expo.easeOut});
       } else {
-        TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut});
+        // TweenMax.to('.fullscreen-bg', 1.4, {opacity:'1',scale: 1,ease: Expo.easeOut});
       }
     };
 

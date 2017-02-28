@@ -25,10 +25,7 @@ body {
 
 body {
   background: #fff;
-  // font-family: 'Consolas';
-  font-family: 'Frutiger Cn';
-  font-family: 'Frutiger Roman';
-  font-family: 'Frutiger Light';
+  font-family: 'F Light';
 }
 
 figure {
@@ -132,9 +129,10 @@ video {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-top: 20px;
 
-  @media (max-width: 767px) {
-    padding-top: 20px;
+  @media (min-width: 767px) {
+    padding-top: 50px;
   }
 
   .video {
@@ -445,7 +443,7 @@ video {
 
   video {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     max-width: none;
      @media (max-width: 767px) {
        display: none;
@@ -453,7 +451,7 @@ video {
    }
 
   img {
-    z-index: 2;
+    z-index: 1;
     position: absolute;
     top: 0;
     left: 0;
